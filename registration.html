@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="header">Join Us</div>
+    
+    <div class="container animate-scale slide-page">
+        <div class="form-card">
+            <h3 style="margin-bottom: 20px; text-align: center;">Fill Your Details</h3>
+            
+            <div class="form-group">
+                <input type="text" id="name" placeholder="👤 Full Name (Required)" required>
+            </div>
+            <div class="form-group">
+                <input type="number" id="age" placeholder="🎂 Age (Required)" required>
+            </div>
+            <div class="form-group">
+                <input type="text" id="class" placeholder="🏫 Class (Required)" required>
+            </div>
+            <div class="form-group">
+                <input type="tel" id="phone" placeholder="📱 Phone Number (Required)" required>
+            </div>
+            <div class="form-group">
+                <input type="email" id="email" placeholder="✉️ Email (Optional)">
+            </div>
+            
+            <button class="btn" onclick="sendToWhatsApp()">Send to WhatsApp 💬</button>
+            <a href="index.html" style="display:block; text-align:center; margin-top:20px; color:#95a5a6; text-decoration: none; font-weight: 600;">Cancel</a>
+        </div>
+    </div>
+
+    <script>
+        function sendToWhatsApp() {
+            let name = document.getElementById('name').value;
+            let age = document.getElementById('age').value;
+            let studentClass = document.getElementById('class').value;
+            let phone = document.getElementById('phone').value;
+            let email = document.getElementById('email').value;
+
+            if(!name || !age || !studentClass || !phone) {
+                alert("Please fill in all required fields.");
+                return;
+            }
+
+            let message = `*🌟 New Registration 🌟*\n\n*👤 Name:* ${name}\n*🎂 Age:* ${age}\n*🏫 Class:* ${studentClass}\n*📱 Phone:* ${phone}\n*✉️ Email:* ${email ? email : 'N/A'}`;
+            
+            let whatsappUrl = `https://wa.me/917548807653?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+        }
+    </script>
+
+    <script>
+        let touchstartX = 0;
+        let touchendX = 0;
+        
+        // Define the exact order of your tabs
+        const pages = ['index.html', 'profiles.html', 'videos.html'];
+        
+        // Find out which page we are currently on
+        let currentPage = window.location.pathname.split('/').pop();
+        if (currentPage === '' || !pages.includes(currentPage)) {
+            currentPage = 'index.html'; // Default to home if not found
+        }
+        
+        let currentIndex = pages.indexOf(currentPage);
+
+        function handleSwipe() {
+            // Swipe Left <- (Go to Next Tab)
+            if (touchendX < touchstartX - 75) {
+                if (currentIndex < pages.length - 1) {
+                    window.location.href = pages[currentIndex + 1];
+                }
+            }
+            // Swipe Right -> (Go to Previous Tab)
+            if (touchendX > touchstartX + 75) {
+                if (currentIndex > 0) {
+                    window.location.href = pages[currentIndex - 1];
+                }
+            }
+        }
+
+        // Listen for finger touching the screen
+        document.addEventListener('touchstart', e => {
+            touchstartX = e.changedTouches[0].screenX;
+        });
+
+        // Listen for finger leaving the screen
+        document.addEventListener('touchend', e => {
+            touchendX = e.changedTouches[0].screenX;
+            handleSwipe();
+        });
+    </script>
+</body>
+</html>
