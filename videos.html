@@ -3,50 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Channel Videos</title>
+    <title>Media Gallery</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <div class="header">Latest Videos</div>
+    <div class="header">Media Gallery</div>
     
     <div class="container animate-scale slide-page">
         <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; background: var(--card-bg); padding: 15px; border-radius: var(--border-radius-lg); box-shadow: var(--shadow-md);">
-            <div style="display: flex; align-items: center; gap: 10px;">
-                <div class="profile-avatar" id="channel-avatar" style="width: 50px; height: 50px; margin: 0; font-size: 20px;">📺</div>
-                <h3 id="channel-name" style="font-size: 16px;">Loading Channel...</h3>
+            <div style="display: flex; align-items: center; gap: 15px;">
+                <div class="profile-avatar" style="width: 50px; height: 50px; margin: 0;">
+                    <img src="https://ui-avatars.com/api/?name=Alphonsa&background=ff0000&color=fff" alt="Channel">
+                </div>
+                <h3 id="channel-name" style="font-size: 16px; color: var(--text-main);">Retrieving Data...</h3>
             </div>
-            <a href="https://youtube.com/@alphonsaa3118" target="_blank" style="background: #ff0000; color: white; padding: 10px 20px; border-radius: 25px; text-decoration: none; font-size: 14px; font-weight: bold; box-shadow: 0 4px 10px rgba(255,0,0,0.3); transition: var(--transition-normal);">Subscribe</a>
+            <a href="https://youtube.com/@alphonsaa3118" target="_blank" style="background: #e62117; color: white; padding: 10px 20px; border-radius: 25px; text-decoration: none; font-size: 14px; font-weight: bold; box-shadow: 0 4px 10px rgba(230,33,23,0.3); transition: var(--transition-normal);"><i class="fa-brands fa-youtube"></i> Subscribe</a>
         </div>
 
         <div id="video-container" class="video-grid">
-            <div class="loader">Fetching latest videos from YouTube... ⏳</div>
+            <div class="loader"><i class="fa-solid fa-circle-notch fa-spin"></i> Syncing media feed...</div>
         </div>
     </div>
 
     <div class="bottom-nav">
-        <a href="index.html"><i>🏠</i>Home</a>
-        <a href="profiles.html"><i>👥</i>Profiles</a>
-        <a href="videos.html" class="active"><i>▶️</i>Videos</a>
+        <a href="index.html"><i class="fa-solid fa-house"></i>Home</a>
+        <a href="profiles.html"><i class="fa-solid fa-users"></i>Profiles</a>
+        <a href="videos.html" class="active"><i class="fa-solid fa-play"></i>Videos</a>
     </div>
 
     <script>
-        let touchstartX = 0, touchendX = 0;
-        const pages = ['index.html', 'profiles.html', 'videos.html'];
-        let currentPage = window.location.pathname.split('/').pop() || 'index.html';
-        let currentIndex = pages.indexOf(currentPage);
-        
-        document.addEventListener('touchstart', e => touchstartX = e.changedTouches[0].screenX);
-        document.addEventListener('touchend', e => { 
-            touchendX = e.changedTouches[0].screenX; 
-            if (touchendX < touchstartX - 75 && currentIndex < pages.length - 1) window.location.href = pages[currentIndex + 1];
-            if (touchendX > touchstartX + 75 && currentIndex > 0) window.location.href = pages[currentIndex - 1];
-        });
-    </script>
-
-    <script>
-        // Your exact YouTube Channel ID is here!
         const YOUTUBE_CHANNEL_ID = "UCDspH0ysu97UO4dmJ8wNcMw"; 
-
         const rssUrl = encodeURIComponent(`https://www.youtube.com/feeds/videos.xml?channel_id=${YOUTUBE_CHANNEL_ID}`);
         const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${rssUrl}`;
 
@@ -54,40 +41,33 @@
             .then(response => response.json())
             .then(data => {
                 const container = document.getElementById('video-container');
-                container.innerHTML = ''; // Clear the loading animation
+                container.innerHTML = ''; 
 
                 if (data.status === 'ok') {
-                    // Update the channel name dynamically based on your YouTube title
                     document.getElementById('channel-name').innerText = data.feed.title;
-                    
-                    // Loop through the fetched videos
                     data.items.forEach(video => {
-                        // Create a clickable card that redirects to YouTube
                         container.innerHTML += `
                             <a href="${video.link}" target="_blank" style="text-decoration: none; display: block;" class="animate-up">
                                 <div class="video-card">
                                     <div class="video-wrapper" style="background-image: url('${video.thumbnail}'); background-size: cover; background-position: center;">
-                                        
-                                        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(255, 0, 0, 0.9); width: 60px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 10px rgba(0,0,0,0.3);">
-                                            <div style="width: 0; height: 0; border-top: 10px solid transparent; border-bottom: 10px solid transparent; border-left: 18px solid white; margin-left: 5px;"></div>
+                                        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(230, 33, 23, 0.9); width: 60px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 10px rgba(0,0,0,0.3);">
+                                            <i class="fa-solid fa-play" style="color: white; font-size: 18px;"></i>
                                         </div>
-
                                     </div>
                                     <div class="video-info">
                                         <h4 style="font-size: 16px; margin-bottom: 5px; color: var(--text-main); line-height: 1.3;">${video.title}</h4>
-                                        <p style="font-size: 12px; color: var(--text-light);">Published: ${video.pubDate.split(' ')[0]}</p>
+                                        <p style="font-size: 12px; color: var(--text-light);"><i class="fa-regular fa-calendar"></i> ${video.pubDate.split(' ')[0]}</p>
                                     </div>
                                 </div>
                             </a>
                         `;
                     });
                 } else {
-                    container.innerHTML = "<p style='text-align:center;'>Could not load videos. YouTube might be blocking the request, or the channel has no recent public videos.</p>";
+                    container.innerHTML = "<p style='text-align:center; color: var(--text-light);'>No media available.</p>";
                 }
             })
             .catch(error => {
-                console.error("Error fetching videos:", error);
-                document.getElementById('video-container').innerHTML = "<p style='text-align:center; color:red;'>Error connecting to YouTube. Please refresh the page.</p>";
+                document.getElementById('video-container').innerHTML = "<p style='text-align:center; color:red;'>Sync error.</p>";
             });
     </script>
 </body>

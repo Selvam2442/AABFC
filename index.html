@@ -3,66 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home App</title>
+    <title>Student Portal</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <div class="header animate-up">Welcome</div>
+    <div class="header animate-up">Student Portal</div>
     
-    <div class="container animate-up slide-page" style="animation-delay: 0.1s;">
+    <div class="container animate-up" style="animation-delay: 0.1s;">
         <div class="form-card" style="text-align: center;">
-            <h2 style="font-size: 28px; margin-bottom: 10px;">Hello! 👋</h2>
-            <p style="color: #7f8c8d; margin-bottom: 25px;">Join our community to view student profiles and watch our awesome videos.</p>
-            <img src="https://cdn-icons-png.flaticon.com/512/2950/2950150.png" alt="Hero" style="width: 120px; margin-bottom: 20px;">
-            <a href="registration.html" class="btn">Register Now</a>
+            <h2 style="font-size: 28px; margin-bottom: 10px; color: var(--text-main);">Welcome</h2>
+            <p style="color: var(--text-light); margin-bottom: 25px;">Access student portfolios, achievements, and professional video content.</p>
+            
+            <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=400&q=80" alt="Students" style="width: 100%; border-radius: 12px; margin-bottom: 25px; box-shadow: var(--shadow-md);">
+            
+            <a href="registration.html" class="btn"><i class="fa-solid fa-user-plus"></i> Register Now</a>
         </div>
     </div>
 
     <div class="bottom-nav">
-        <a href="index.html" class="active"><i>🏠</i>Home</a>
-        <a href="profiles.html"><i>👥</i>Profiles</a>
-        <a href="videos.html"><i>▶️</i>Videos</a>
+        <a href="index.html" class="active"><i class="fa-solid fa-house"></i>Home</a>
+        <a href="profiles.html"><i class="fa-solid fa-users"></i>Profiles</a>
+        <a href="videos.html"><i class="fa-solid fa-play"></i>Videos</a>
     </div>
 
     <script>
-        let touchstartX = 0;
-        let touchendX = 0;
-        
-        // Define the exact order of your tabs
+        let touchstartX = 0, touchendX = 0;
         const pages = ['index.html', 'profiles.html', 'videos.html'];
-        
-        // Find out which page we are currently on
-        let currentPage = window.location.pathname.split('/').pop();
-        if (currentPage === '' || !pages.includes(currentPage)) {
-            currentPage = 'index.html'; // Default to home if not found
-        }
-        
+        let currentPage = window.location.pathname.split('/').pop() || 'index.html';
         let currentIndex = pages.indexOf(currentPage);
-
-        function handleSwipe() {
-            // Swipe Left <- (Go to Next Tab)
-            if (touchendX < touchstartX - 75) {
-                if (currentIndex < pages.length - 1) {
-                    window.location.href = pages[currentIndex + 1];
-                }
-            }
-            // Swipe Right -> (Go to Previous Tab)
-            if (touchendX > touchstartX + 75) {
-                if (currentIndex > 0) {
-                    window.location.href = pages[currentIndex - 1];
-                }
-            }
-        }
-
-        // Listen for finger touching the screen
-        document.addEventListener('touchstart', e => {
-            touchstartX = e.changedTouches[0].screenX;
-        });
-
-        // Listen for finger leaving the screen
-        document.addEventListener('touchend', e => {
-            touchendX = e.changedTouches[0].screenX;
-            handleSwipe();
+        document.addEventListener('touchstart', e => touchstartX = e.changedTouches[0].screenX);
+        document.addEventListener('touchend', e => { 
+            touchendX = e.changedTouches[0].screenX; 
+            if (touchendX < touchstartX - 75 && currentIndex < pages.length - 1) window.location.href = pages[currentIndex + 1];
+            if (touchendX > touchstartX + 75 && currentIndex > 0) window.location.href = pages[currentIndex - 1];
         });
     </script>
 </body>

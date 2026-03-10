@@ -3,34 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register</title>
+    <title>Registration</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <div class="header">Join Us</div>
+    <div class="header">Registration</div>
     
     <div class="container animate-scale slide-page">
         <div class="form-card">
-            <h3 style="margin-bottom: 20px; text-align: center;">Fill Your Details</h3>
+            <h3 style="margin-bottom: 25px; text-align: center; color: var(--text-main);">Enter Details</h3>
             
             <div class="form-group">
-                <input type="text" id="name" placeholder="👤 Full Name (Required)" required>
+                <input type="text" id="name" placeholder="Full Name (Required)" required>
+                <i class="fa-solid fa-user input-icon"></i>
             </div>
             <div class="form-group">
-                <input type="number" id="age" placeholder="🎂 Age (Required)" required>
+                <input type="number" id="age" placeholder="Age (Required)" required>
+                <i class="fa-solid fa-calendar input-icon"></i>
             </div>
             <div class="form-group">
-                <input type="text" id="class" placeholder="🏫 Class (Required)" required>
+                <input type="text" id="class" placeholder="Class (Required)" required>
+                <i class="fa-solid fa-graduation-cap input-icon"></i>
             </div>
             <div class="form-group">
-                <input type="tel" id="phone" placeholder="📱 Phone Number (Required)" required>
+                <input type="tel" id="phone" placeholder="Phone Number (Required)" required>
+                <i class="fa-solid fa-phone input-icon"></i>
             </div>
             <div class="form-group">
-                <input type="email" id="email" placeholder="✉️ Email (Optional)">
+                <input type="email" id="email" placeholder="Email Address (Optional)">
+                <i class="fa-solid fa-envelope input-icon"></i>
             </div>
             
-            <button class="btn" onclick="sendToWhatsApp()">Send to WhatsApp 💬</button>
-            <a href="index.html" style="display:block; text-align:center; margin-top:20px; color:#95a5a6; text-decoration: none; font-weight: 600;">Cancel</a>
+            <button class="btn" onclick="sendToWhatsApp()"><i class="fa-brands fa-whatsapp"></i> Submit Registration</button>
+            <a href="index.html" style="display:block; text-align:center; margin-top:20px; color:var(--text-light); text-decoration: none; font-weight: 600;"><i class="fa-solid fa-arrow-left"></i> Return Home</a>
         </div>
     </div>
 
@@ -43,57 +49,14 @@
             let email = document.getElementById('email').value;
 
             if(!name || !age || !studentClass || !phone) {
-                alert("Please fill in all required fields.");
+                alert("Please complete all required fields.");
                 return;
             }
 
-            let message = `*🌟 New Registration 🌟*\n\n*👤 Name:* ${name}\n*🎂 Age:* ${age}\n*🏫 Class:* ${studentClass}\n*📱 Phone:* ${phone}\n*✉️ Email:* ${email ? email : 'N/A'}`;
-            
-            let whatsappUrl = `https://wa.me/917548807653?text=${encodeURIComponent(message)}`;
+            let message = `*New Registration Application*\n\n*Name:* ${name}\n*Age:* ${age}\n*Class:* ${studentClass}\n*Phone:* ${phone}\n*Email:* ${email ? email : 'Not provided'}`;
+            let whatsappUrl = `https://wa.me/916380466535?text=${encodeURIComponent(message)}`;
             window.open(whatsappUrl, '_blank');
         }
-    </script>
-
-    <script>
-        let touchstartX = 0;
-        let touchendX = 0;
-        
-        // Define the exact order of your tabs
-        const pages = ['index.html', 'profiles.html', 'videos.html'];
-        
-        // Find out which page we are currently on
-        let currentPage = window.location.pathname.split('/').pop();
-        if (currentPage === '' || !pages.includes(currentPage)) {
-            currentPage = 'index.html'; // Default to home if not found
-        }
-        
-        let currentIndex = pages.indexOf(currentPage);
-
-        function handleSwipe() {
-            // Swipe Left <- (Go to Next Tab)
-            if (touchendX < touchstartX - 75) {
-                if (currentIndex < pages.length - 1) {
-                    window.location.href = pages[currentIndex + 1];
-                }
-            }
-            // Swipe Right -> (Go to Previous Tab)
-            if (touchendX > touchstartX + 75) {
-                if (currentIndex > 0) {
-                    window.location.href = pages[currentIndex - 1];
-                }
-            }
-        }
-
-        // Listen for finger touching the screen
-        document.addEventListener('touchstart', e => {
-            touchstartX = e.changedTouches[0].screenX;
-        });
-
-        // Listen for finger leaving the screen
-        document.addEventListener('touchend', e => {
-            touchendX = e.changedTouches[0].screenX;
-            handleSwipe();
-        });
     </script>
 </body>
 </html>

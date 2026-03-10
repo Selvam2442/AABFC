@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profiles</title>
+    <title>Student Roster</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
     <div class="header">Student Roster</div>
@@ -13,40 +14,41 @@
         <div class="profile-grid">
             
             <a href="profile.html?student=Selvam" class="profile-card">
-                <div class="profile-avatar">👨‍🎨</div>
+                <div class="profile-avatar">
+                    <img src="https://ui-avatars.com/api/?name=Selvam&background=25D366&color=fff&size=128" alt="Selvam">
+                </div>
                 <h3>Selvam</h3>
-                <p style="font-size: 12px; color: #7f8c8d; margin-top: 5px;">Artist & Achiever</p>
+                <p style="font-size: 12px; color: var(--text-light); margin-top: 5px;">View Portfolio</p>
             </a>
 
             <a href="profile.html?student=Antony" class="profile-card">
-                <div class="profile-avatar">👨‍💻</div>
+                <div class="profile-avatar">
+                    <img src="https://ui-avatars.com/api/?name=Antony&background=128C7E&color=fff&size=128" alt="Antony">
+                </div>
                 <h3>Antony</h3>
-                <p style="font-size: 12px; color: #7f8c8d; margin-top: 5px;">Web Developer</p>
+                <p style="font-size: 12px; color: var(--text-light); margin-top: 5px;">View Portfolio</p>
             </a>
-
-            </div>
+            
+        </div>
     </div>
 
     <div class="bottom-nav">
-        <a href="index.html"><i>🏠</i>Home</a>
-        <a href="profiles.html" class="active"><i>👥</i>Profiles</a>
-        <a href="videos.html"><i>▶️</i>Videos</a>
+        <a href="index.html"><i class="fa-solid fa-house"></i>Home</a>
+        <a href="profiles.html" class="active"><i class="fa-solid fa-users"></i>Profiles</a>
+        <a href="videos.html"><i class="fa-solid fa-play"></i>Videos</a>
     </div>
 
     <script>
-        let touchstartX = 0;
-        let touchendX = 0;
+        let touchstartX = 0, touchendX = 0;
         const pages = ['index.html', 'profiles.html', 'videos.html'];
         let currentPage = window.location.pathname.split('/').pop() || 'index.html';
         let currentIndex = pages.indexOf(currentPage);
-
-        function handleSwipe() {
+        document.addEventListener('touchstart', e => touchstartX = e.changedTouches[0].screenX);
+        document.addEventListener('touchend', e => { 
+            touchendX = e.changedTouches[0].screenX; 
             if (touchendX < touchstartX - 75 && currentIndex < pages.length - 1) window.location.href = pages[currentIndex + 1];
             if (touchendX > touchstartX + 75 && currentIndex > 0) window.location.href = pages[currentIndex - 1];
-        }
-
-        document.addEventListener('touchstart', e => touchstartX = e.changedTouches[0].screenX);
-        document.addEventListener('touchend', e => { touchendX = e.changedTouches[0].screenX; handleSwipe(); });
+        });
     </script>
 </body>
 </html>
