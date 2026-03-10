@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Profile</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .gallery-item {
+            background: white;
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            text-align: center;
+        }
+        .gallery-item img {
+            max-width: 100%;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+        .gallery-item p {
+            color: #555;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        .loader {
+            text-align: center;
+            padding: 20px;
+            font-weight: bold;
+            color: #25D366; 
+        }
+    </style>
+</head>
+<body>
+    <div class="header" id="header-title">Loading Portfolio...</div>
+    
+    <div class="container animate-scale slide-page">
+        <div style="text-align: center; margin-bottom: 20px;">
+            <div class="profile-avatar" style="width: 100px; height: 100px; font-size: 40px;">🎓</div>
+            <h2 id="student-name">Loading...</h2>
+        </div>
+        
+        <div class="tabs">
+            <button class="tab-btn active" onclick="openTab('paintings')">🎨 Paintings</button>
+            <button class="tab-btn" onclick="openTab('achievements')">🏆 Achievements</button>
+        </div>
+
+        <div id="paintings" class="tab-content active">
+            <div id="paintings-container">
+                <div class="loader">Loading from Drive... ⏳</div>
+            </div>
+        </div>
+
+        <div id="achievements" class="tab-content">
+            <div id="achievements-container">
+                <div class="loader">Loading from Drive... ⏳</div>
+            </div>
+        </div>
+
+        <a href="profiles.html" class="btn" style="background: #95a5a6; margin-top: 20px;">🔙 Back to Profiles</a>
+    </div>
+
+    <script>
+        let touchstartX = 0;
+        let touchendX = 0;
+        const pages = ['index.html', 'profiles.html', 'videos.html'];
+        let currentPage = window.location.pathname.split('/').pop() || 'index.html';
+        let currentIndex = pages.indexOf(currentPage);
+
+        function handleSwipe() {
+            if (touchendX < touchstartX - 75 && currentIndex < pages.length - 1) window.location.href = pages[currentIndex + 1];
+            if (touchendX > touchstartX + 75 && currentIndex > 0) window.location.href = pages[currentIndex - 1];
+        }
+
+        document.addEventListener('touchstart', e => touchstartX = e.changedTouches[0].screenX);
+        document.addEventListener('touchend', e => { touchendX = e.changedTouches[0].screenX; handleSwipe(); });
+    </script>
+
+    <script>
+        // --- 1. Tab Logic ---
+        function openTab(tabName) {
+            let tabcontent = document.getElementsByClassName("tab-content");
+            for (let i = 0; i < tabcontent.length; i++) tabcontent[i].classList.remove("active");
+            let tablinks = document.getElementsByClassName("tab-btn");
+            for (let i = 0; i < tablinks.length; i++) tablinks[i].classList.remove("active");
+            
+            document.getElementById(tabName).classList.add("active");
+            event.currentTarget.classList.add("active");
+        }
+
+        // --- 2. Dynamic Student Logic ---
+        const urlParams = new URLSearchParams(window.location.search);
+        const studentName = urlParams.get('student') || 'Student';
+
+        document.getElementById('student-name').innerText = studentName;
+        document.getElementById('header-title').innerText = studentName + "'s Portfolio";
+        document.title = studentName + "'s Profile";
+
+        // --- 3. Fetch Data from Your ACTIVE Google Script URL ---
+        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyfyKNm1lUecFRhi7clz4rENlfCxyDGZQDHevcXSm8e5CNE00meMk9_0Zp8n9wVkw8huw/exec"; 
+
+        fetch(SCRIPT_URL + "?name=" + studentName)
+            .then(response => response.json())
+            .then(data => {
+                const paintContainer = document.getElementById('paintings-container');
+                const achiContainer = document.getElementById('achievements-container');
+                
+                paintContainer.innerHTML = '';
+                achiContainer.innerHTML = '';
+
+                // Handle Errors from Drive (like Folder not found)
+                if(data.error) {
+                    paintContainer.innerHTML = `<p style='text-align:center; color:red;'>Folder for ${studentName} not found.</p>`;
+                    achiContainer.innerHTML = `<p style='text-align:center; color:red;'>Folder for ${studentName} not found.</p>`;
+                    return;
+                }
+
+                // Render Paintings
+                if (data.paintings && data.paintings.length > 0) {
+                    data.paintings.forEach(item => {
+                        paintContainer.innerHTML += `
+                            <div class="gallery-item animate-up">
+                                <img src="${item.img}" alt="Painting">
+                                <p>${item.desc}</p>
+                            </div>
+                        `;
+                    });
+                } else {
+                    paintContainer.innerHTML = "<p style='text-align:center;'>No paintings found in Drive.</p>";
+                }
+
+                // Render Achievements
+                if (data.achievements && data.achievements.length > 0) {
+                    data.achievements.forEach(item => {
+                        achiContainer.innerHTML += `
+                            <div class="gallery-item animate-up">
+                                <img src="${item.img}" alt="Achievement">
+                                <p>${item.desc}</p>
+                            </div>
+                        `;
+                    });
+                } else {
+                    achiContainer.innerHTML = "<p style='text-align:center;'>No achievements found in Drive.</p>";
+                }
+            })
+            .catch(error => {
+                console.error("Error loading drive data:", error);
+                document.getElementById('paintings-container').innerHTML = "<p style='text-align:center;'>Error loading data.</p>";
+                document.getElementById('achievements-container').innerHTML = "<p style='text-align:center;'>Error loading data.</p>";
+            });
+    </script>
+</body>
+</html>

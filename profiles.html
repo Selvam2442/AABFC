@@ -12,10 +12,16 @@
     <div class="container animate-up slide-page">
         <div class="profile-grid">
             
-            <a href="Selvam.html" class="profile-card">
+            <a href="profile.html?student=Selvam" class="profile-card">
                 <div class="profile-avatar">👨‍🎨</div>
                 <h3>Selvam</h3>
                 <p style="font-size: 12px; color: #7f8c8d; margin-top: 5px;">Artist & Achiever</p>
+            </a>
+
+            <a href="profile.html?student=Antony" class="profile-card">
+                <div class="profile-avatar">👨‍💻</div>
+                <h3>Antony</h3>
+                <p style="font-size: 12px; color: #7f8c8d; margin-top: 5px;">Web Developer</p>
             </a>
 
             </div>
@@ -30,43 +36,17 @@
     <script>
         let touchstartX = 0;
         let touchendX = 0;
-        
-        // Define the exact order of your tabs
         const pages = ['index.html', 'profiles.html', 'videos.html'];
-        
-        // Find out which page we are currently on
-        let currentPage = window.location.pathname.split('/').pop();
-        if (currentPage === '' || !pages.includes(currentPage)) {
-            currentPage = 'index.html'; // Default to home if not found
-        }
-        
+        let currentPage = window.location.pathname.split('/').pop() || 'index.html';
         let currentIndex = pages.indexOf(currentPage);
 
         function handleSwipe() {
-            // Swipe Left <- (Go to Next Tab)
-            if (touchendX < touchstartX - 75) {
-                if (currentIndex < pages.length - 1) {
-                    window.location.href = pages[currentIndex + 1];
-                }
-            }
-            // Swipe Right -> (Go to Previous Tab)
-            if (touchendX > touchstartX + 75) {
-                if (currentIndex > 0) {
-                    window.location.href = pages[currentIndex - 1];
-                }
-            }
+            if (touchendX < touchstartX - 75 && currentIndex < pages.length - 1) window.location.href = pages[currentIndex + 1];
+            if (touchendX > touchstartX + 75 && currentIndex > 0) window.location.href = pages[currentIndex - 1];
         }
 
-        // Listen for finger touching the screen
-        document.addEventListener('touchstart', e => {
-            touchstartX = e.changedTouches[0].screenX;
-        });
-
-        // Listen for finger leaving the screen
-        document.addEventListener('touchend', e => {
-            touchendX = e.changedTouches[0].screenX;
-            handleSwipe();
-        });
+        document.addEventListener('touchstart', e => touchstartX = e.changedTouches[0].screenX);
+        document.addEventListener('touchend', e => { touchendX = e.changedTouches[0].screenX; handleSwipe(); });
     </script>
 </body>
 </html>
