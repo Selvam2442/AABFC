@@ -3,16 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Portal</title>
+    
+    <title>Arokiya Annai Blessed Flair Centre</title>
+    
+    <link rel="icon" type="image/png" href="logo.png">
+    
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <div class="header animate-up">Student Portal</div>
+    <div class="header animate-up">
+        <img src="logo.jpeg" alt="Logo" class="header-logo">
+        <span>Arokiya Annai Blessed Flair Centre</span>
+    </div>
     
     <div class="container animate-up" style="animation-delay: 0.1s;">
         <div class="form-card" style="text-align: center;">
-            <h2 style="font-size: 28px; margin-bottom: 10px; color: var(--text-main);">Welcome</h2>
+            <h2 style="font-size: 24px; margin-bottom: 10px; color: var(--text-main);">Welcome</h2>
             <p style="color: var(--text-light); margin-bottom: 25px;">Access student portfolios, achievements, and professional video content.</p>
             
             <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=400&q=80" alt="Students" style="width: 100%; border-radius: 12px; margin-bottom: 25px; box-shadow: var(--shadow-md);">
@@ -20,6 +27,10 @@
             <a href="registration.html" class="btn"><i class="fa-solid fa-user-plus"></i> Register Now</a>
         </div>
     </div>
+
+    <a href="https://wa.me/917548822653" target="_blank" class="floating-wa">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
 
     <div class="bottom-nav">
         <a href="index.html" class="active"><i class="fa-solid fa-house"></i>Home</a>
@@ -32,9 +43,9 @@
         const pages = ['index.html', 'profiles.html', 'videos.html'];
         let currentPage = window.location.pathname.split('/').pop() || 'index.html';
         let currentIndex = pages.indexOf(currentPage);
-        document.addEventListener('touchstart', e => touchstartX = e.changedTouches[0].screenX);
+        document.addEventListener('touchstart', e => touchstartX = e.changedTouches.screenX);
         document.addEventListener('touchend', e => { 
-            touchendX = e.changedTouches[0].screenX; 
+            touchendX = e.changedTouches.screenX; 
             if (touchendX < touchstartX - 75 && currentIndex < pages.length - 1) window.location.href = pages[currentIndex + 1];
             if (touchendX > touchstartX + 75 && currentIndex > 0) window.location.href = pages[currentIndex - 1];
         });

@@ -169,3 +169,47 @@ body {
     .profile-avatar { border-color: var(--card-bg); }
     .tabs { background: linear-gradient(135deg, #1f2937, #111827); }
 }
+/* Floating WhatsApp Button */
+.floating-wa {
+    position: fixed;
+    bottom: 90px; /* Sits exactly above the bottom nav */
+    right: 20px;
+    background-color: #25D366;
+    color: white;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 35px;
+    box-shadow: var(--shadow-lg), 0 0 20px rgba(37, 211, 102, 0.4);
+    z-index: 999;
+    transition: var(--transition-normal);
+    text-decoration: none;
+    animation: bounceIn 0.6s ease-out forwards;
+}
+
+.floating-wa:hover, .floating-wa:active {
+    transform: scale(1.1) translateY(-5px);
+    box-shadow: var(--shadow-xl), 0 0 30px rgba(37, 211, 102, 0.6);
+}
+
+/* Updated Header for Logo + Text */
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 20px 15px;
+    font-size: 18px; /* Slightly smaller to fit the long name */
+}
+
+.header-logo {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid white;
+    box-shadow: var(--shadow-sm);
+}
