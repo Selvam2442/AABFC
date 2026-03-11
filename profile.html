@@ -4,11 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Profile</title>
+    <link rel="icon" type="image/jpeg" href="logo.jpeg">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <div class="header" id="header-title">Loading Portfolio...</div>
+    <div class="header">
+        <img src="logo.jpeg" alt="Logo" class="header-logo">
+        <span id="header-title">Loading Portfolio...</span>
+    </div>
     
     <div class="container animate-scale slide-page">
         <div style="text-align: center; margin-bottom: 20px;">
@@ -38,6 +42,10 @@
         <a href="profiles.html" class="btn" style="background: var(--text-light); margin-top: 25px;"><i class="fa-solid fa-arrow-left"></i> Back to Roster</a>
     </div>
 
+    <a href="https://wa.me/917548822653" target="_blank" class="floating-wa">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+
     <script>
         function openTab(tabName) {
             let tabcontent = document.getElementsByClassName("tab-content");
@@ -51,13 +59,11 @@
         const urlParams = new URLSearchParams(window.location.search);
         const studentName = urlParams.get('student') || 'Student';
 
-        // Set Dynamic Name and Avatar
         document.getElementById('student-name').innerText = studentName;
         document.getElementById('header-title').innerText = studentName + " Portfolio";
-        document.title = studentName + " Profile";
+        document.title = studentName + " - Arokiya Annai";
         document.getElementById('dynamic-avatar').src = `https://ui-avatars.com/api/?name=${studentName}&background=random&color=fff&size=256`;
 
-        // Your Drive App Script
         const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyfyKNm1lUecFRhi7clz4rENlfCxyDGZQDHevcXSm8e5CNE00meMk9_0Zp8n9wVkw8huw/exec"; 
 
         fetch(SCRIPT_URL + "?name=" + studentName)
@@ -74,15 +80,11 @@
                 }
 
                 if (data.paintings && data.paintings.length > 0) {
-                    data.paintings.forEach(item => {
-                        paintContainer.innerHTML += `<div class="gallery-item animate-up"><img src="${item.img}" alt="Artwork"><p>${item.desc}</p></div>`;
-                    });
+                    data.paintings.forEach(item => { paintContainer.innerHTML += `<div class="gallery-item animate-up"><img src="${item.img}" alt="Artwork"><p>${item.desc}</p></div>`; });
                 } else { paintContainer.innerHTML = "<p style='text-align:center; color: var(--text-light);'>No records found.</p>"; }
 
                 if (data.achievements && data.achievements.length > 0) {
-                    data.achievements.forEach(item => {
-                        achiContainer.innerHTML += `<div class="gallery-item animate-up"><img src="${item.img}" alt="Certificate"><p>${item.desc}</p></div>`;
-                    });
+                    data.achievements.forEach(item => { achiContainer.innerHTML += `<div class="gallery-item animate-up"><img src="${item.img}" alt="Certificate"><p>${item.desc}</p></div>`; });
                 } else { achiContainer.innerHTML = "<p style='text-align:center; color: var(--text-light);'>No records found.</p>"; }
             })
             .catch(error => {

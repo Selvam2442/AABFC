@@ -3,11 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
     <title>Arokiya Annai Blessed Flair Centre</title>
-    
-    <link rel="icon" type="image/png" href="logo.png">
-    
+    <link rel="icon" type="image/jpeg" href="logo.jpeg">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
@@ -41,8 +38,7 @@
     <script>
         let touchstartX = 0, touchendX = 0;
         const pages = ['index.html', 'profiles.html', 'videos.html'];
-        let currentPage = window.location.pathname.split('/').pop() || 'index.html';
-        let currentIndex = pages.indexOf(currentPage);
+        let currentIndex = pages.indexOf('index.html');
         document.addEventListener('touchstart', e => touchstartX = e.changedTouches.screenX);
         document.addEventListener('touchend', e => { 
             touchendX = e.changedTouches.screenX; 

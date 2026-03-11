@@ -26,7 +26,7 @@
 body {
     background: linear-gradient(135deg, var(--bg-color) 0%, var(--bg-dark) 100%);
     color: var(--text-main);
-    padding-bottom: calc(90px + env(safe-area-inset-bottom)); /* iPhone Safe Area */
+    padding-bottom: calc(90px + env(safe-area-inset-bottom));
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
     scroll-behavior: smooth;
@@ -38,19 +38,23 @@ body {
 @keyframes scaleIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
 @keyframes slideIn { 0% { transform: translateX(30px); opacity: 0; } 100% { transform: translateX(0); opacity: 1; } }
 @keyframes slideUp { from { transform: translateY(100px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+@keyframes bounceIn { 0% { transform: scale(0.3); opacity: 0; } 50% { transform: scale(1.05); } 70% { transform: scale(0.9); } 100% { transform: scale(1); opacity: 1; } }
 
 .animate-up { animation: fadeInUp 0.6s ease-out forwards; }
 .animate-scale { animation: scaleIn 0.5s ease-out forwards; }
 .slide-page { animation: slideIn 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) forwards; }
 
-/* Header */
+/* Dynamic Header with Logo */
 .header {
     background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 50%, var(--primary-light) 100%);
-    color: white; padding: 25px 20px; text-align: center; font-size: 24px; font-weight: 700;
+    color: white; padding: 20px 15px; font-weight: 700;
     border-bottom-left-radius: var(--border-radius-xl); border-bottom-right-radius: var(--border-radius-xl);
     box-shadow: var(--shadow-xl), 0 0 30px rgba(37, 211, 102, 0.2);
     position: sticky; top: 0; z-index: 100; backdrop-filter: blur(20px); text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    display: flex; align-items: center; justify-content: center; gap: 12px; font-size: 18px;
 }
+.header-logo { width: 35px; height: 35px; border-radius: 50%; object-fit: cover; border: 2px solid white; box-shadow: var(--shadow-sm); flex-shrink: 0; background-color: white; }
+.header span { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 80%; }
 
 .container { padding: 25px 20px; max-width: 900px; margin: 0 auto; position: relative; width: 100%; }
 
@@ -58,7 +62,7 @@ body {
 .bottom-nav {
     position: fixed; bottom: 0; left: 0; width: 100%; background: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(20px); display: flex; justify-content: space-around; 
-    padding: 15px 0 calc(15px + env(safe-area-inset-bottom)); /* Adapts to modern phones without home buttons */
+    padding: 15px 0 calc(15px + env(safe-area-inset-bottom));
     box-shadow: 0 -8px 32px rgba(0,0,0,0.08); z-index: 1000;
     border-top: 1px solid rgba(255,255,255,0.8); border-radius: var(--border-radius-lg) var(--border-radius-lg) 0 0;
 }
@@ -66,40 +70,39 @@ body {
 .bottom-nav a.active { color: var(--primary-dark); transform: translateY(-3px); }
 .bottom-nav a i { font-size: 22px; margin-bottom: 6px; transition: var(--transition-normal); }
 
+/* Floating WhatsApp Button */
+.floating-wa {
+    position: fixed; bottom: calc(90px + env(safe-area-inset-bottom)); right: 20px;
+    background-color: #25D366; color: white; width: 60px; height: 60px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center; font-size: 35px;
+    box-shadow: var(--shadow-lg), 0 0 20px rgba(37, 211, 102, 0.4); z-index: 999;
+    transition: var(--transition-normal); text-decoration: none; animation: bounceIn 0.6s ease-out forwards;
+}
+.floating-wa:active { transform: scale(0.9); }
+.floating-wa:hover { transform: scale(1.1) translateY(-5px); box-shadow: var(--shadow-xl), 0 0 30px rgba(37, 211, 102, 0.6); }
+
 /* Forms */
 .form-card { background: var(--card-bg); padding: 30px; border-radius: var(--border-radius-xl); box-shadow: var(--shadow-lg); border: 1px solid rgba(255,255,255,0.8); }
 .form-group { margin-bottom: 20px; position: relative; }
-.form-group input {
-    width: 100%; padding: 18px 45px 18px 20px; border: 2px solid rgba(0,0,0,0.1);
-    border-radius: var(--border-radius-lg); font-size: 16px; transition: var(--transition-normal);
-    -webkit-appearance: none; /* Removes default iOS styling */
-}
+.form-group input { width: 100%; padding: 18px 45px 18px 20px; border: 2px solid rgba(0,0,0,0.1); border-radius: var(--border-radius-lg); font-size: 16px; transition: var(--transition-normal); -webkit-appearance: none; }
 .form-group input:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 4px rgba(37, 211, 102, 0.15); }
 .input-icon { position: absolute; right: 18px; top: 50%; transform: translateY(-50%); color: var(--text-light); font-size: 18px; pointer-events: none; }
 .form-group input:focus + .input-icon { color: var(--primary); }
 
-.btn {
-    display: block; width: 100%; padding: 18px; background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-    color: white; text-align: center; text-decoration: none; border: none; border-radius: var(--border-radius-lg);
-    font-size: 16px; font-weight: 700; cursor: pointer; transition: var(--transition-normal); box-shadow: var(--shadow-md); text-transform: uppercase; letter-spacing: 1px;
-}
+.btn { display: block; width: 100%; padding: 18px; background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%); color: white; text-align: center; text-decoration: none; border: none; border-radius: var(--border-radius-lg); font-size: 16px; font-weight: 700; cursor: pointer; transition: var(--transition-normal); box-shadow: var(--shadow-md); text-transform: uppercase; letter-spacing: 1px; }
 .btn:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
 
 /* Profiles */
 .profile-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 20px; }
-.profile-card { background: var(--card-bg); padding: 25px 20px; border-radius: var(--border-radius-lg); text-align: center; text-decoration: none; color: var(--text-main); box-shadow: var(--shadow-sm); transition: var(--transition-normal); display: flex; flex-direction: column; align-items: center; justify-content: center; }
-.profile-card:active { transform: scale(0.98); } /* Mobile tap feedback */
+.profile-card { background: var(--card-bg); padding: 25px 20px; border-radius: var(--border-radius-lg); text-align: center; text-decoration: none; color: var(--text-main); box-shadow: var(--shadow-sm); transition: var(--transition-normal); display: flex; flex-direction: column; align-items: center; justify-content: center; border: 2px solid transparent; }
+.profile-card:active { transform: scale(0.98); }
 .profile-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); border-color: var(--primary); }
-
-.profile-avatar {
-    width: 80px; height: 80px; background: var(--bg-dark); border-radius: 50%; margin: 0 auto 15px;
-    display: flex; align-items: center; justify-content: center; box-shadow: var(--shadow-sm); overflow: hidden; border: 2px solid white; flex-shrink: 0;
-}
+.profile-avatar { width: 80px; height: 80px; background: var(--bg-dark); border-radius: 50%; margin: 0 auto 15px; display: flex; align-items: center; justify-content: center; box-shadow: var(--shadow-sm); overflow: hidden; border: 2px solid white; flex-shrink: 0; }
 .profile-avatar img { width: 100%; height: 100%; object-fit: cover; }
 
 /* Tabs */
 .tabs { display: flex; background: linear-gradient(135deg, #eef2f5, #e5e7eb); border-radius: var(--border-radius-lg); padding: 6px; margin-bottom: 25px; }
-.tab-btn { flex: 1; padding: 14px 10px; background: transparent; border: none; border-radius: var(--border-radius-md); cursor: pointer; font-weight: 600; color: var(--text-light); display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 15px; }
+.tab-btn { flex: 1; padding: 14px 10px; background: transparent; border: none; border-radius: var(--border-radius-md); cursor: pointer; font-weight: 600; color: var(--text-light); display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 15px; transition: var(--transition-normal); }
 .tab-btn.active { background: var(--card-bg); color: var(--primary-dark); box-shadow: var(--shadow-sm); }
 .tab-content { display: none; background: var(--card-bg); padding: 25px; border-radius: var(--border-radius-lg); box-shadow: var(--shadow-sm); animation: slideUp 0.3s ease-out; }
 .tab-content.active { display: block; }
@@ -111,105 +114,39 @@ body {
 .video-wrapper { position: relative; padding-bottom: 56.25%; height: 0; width: 100%; }
 .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
 .video-info { padding: 18px; }
-
 .gallery-item { background: var(--card-bg); border-radius: var(--border-radius-lg); padding: 20px; margin-bottom: 20px; text-align: center; box-shadow: var(--shadow-sm); }
 .gallery-item img { max-width: 100%; height: auto; border-radius: var(--border-radius-md); margin-bottom: 12px; }
-
-/* Loader */
 .loader { text-align: center; padding: 30px; font-weight: bold; color: var(--primary); display: flex; align-items: center; flex-direction: column; gap: 15px; }
 
-/* =========================================================
-   PERFECT MOBILE RESPONSIVENESS (Phones & Small Tablets) 
-   ========================================================= */
-
+/* Responsive Adjustments */
 @media (max-width: 768px) {
     .container { padding: 20px 15px; }
-    .header { font-size: 20px; padding: 20px 15px; border-bottom-left-radius: 15px; border-bottom-right-radius: 15px; }
-    
-    /* Make the grid flexible for tablets */
+    .header { font-size: 16px; padding: 15px; border-bottom-left-radius: 15px; border-bottom-right-radius: 15px; }
     .profile-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 15px; }
-    
-    /* Ensure videos take up the full width on smaller screens */
     .video-grid { grid-template-columns: 1fr; gap: 20px; }
-    
-    .form-card { padding: 25px 20px; }
-    
-    .tab-content { padding: 20px 15px; }
+    .form-card, .tab-content { padding: 20px 15px; }
 }
-
 @media (max-width: 480px) {
-    .header { font-size: 18px; padding: 18px 15px; }
-    
-    /* Optimize buttons for thumbs */
-    .btn { font-size: 15px; padding: 16px; }
-    .form-group input { font-size: 15px; padding: 16px 40px 16px 16px; }
-    
-    /* Tighter grid for very small phone screens (e.g., iPhone SE) */
+    .header span { font-size: 14px; }
+    .header-logo { width: 30px; height: 30px; }
+    .btn, .form-group input { font-size: 15px; padding: 16px; }
+    .form-group input { padding-right: 40px; }
     .profile-grid { grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 12px; }
     .profile-card { padding: 20px 15px; }
     .profile-avatar { width: 65px; height: 65px; }
     .profile-card h3 { font-size: 16px; }
-    
-    /* Adjust tabs so text doesn't squish */
     .tab-btn { padding: 12px 8px; font-size: 13px; gap: 5px; }
-    
-    /* Bottom nav text and icon sizing */
     .bottom-nav a { font-size: 11px; }
     .bottom-nav a i { font-size: 20px; margin-bottom: 4px; }
-    
     .video-info { padding: 15px; }
     .video-info h4 { font-size: 15px; }
+    .floating-wa { width: 55px; height: 55px; font-size: 30px; }
 }
 
-/* Dark Mode */
 @media (prefers-color-scheme: dark) {
     :root { --bg-color: #1f2937; --bg-dark: #111827; --text-main: #f9fafb; --text-light: #9ca3af; --card-bg: #374151; }
     .bottom-nav { background: rgba(31, 41, 55, 0.95); border-top: 1px solid rgba(255,255,255,0.1); }
     .form-group input { background: rgba(17, 24, 39, 0.8); color: white; border-color: rgba(255,255,255,0.1); }
     .profile-avatar { border-color: var(--card-bg); }
     .tabs { background: linear-gradient(135deg, #1f2937, #111827); }
-}
-/* Floating WhatsApp Button */
-.floating-wa {
-    position: fixed;
-    bottom: 90px; /* Sits exactly above the bottom nav */
-    right: 20px;
-    background-color: #25D366;
-    color: white;
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 35px;
-    box-shadow: var(--shadow-lg), 0 0 20px rgba(37, 211, 102, 0.4);
-    z-index: 999;
-    transition: var(--transition-normal);
-    text-decoration: none;
-    animation: bounceIn 0.6s ease-out forwards;
-}
-
-.floating-wa:hover, .floating-wa:active {
-    transform: scale(1.1) translateY(-5px);
-    box-shadow: var(--shadow-xl), 0 0 30px rgba(37, 211, 102, 0.6);
-}
-
-/* Updated Header for Logo + Text */
-.header {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
-    padding: 20px 15px;
-    font-size: 18px; /* Slightly smaller to fit the long name */
-}
-
-.header-logo {
-    width: 35px;
-    height: 35px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 2px solid white;
-    box-shadow: var(--shadow-sm);
 }

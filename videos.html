@@ -3,12 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Media Gallery</title>
+    <title>Videos - Arokiya Annai</title>
+    <link rel="icon" type="image/jpeg" href="logo.jpeg">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <div class="header">Media Gallery</div>
+    <div class="header">
+        <img src="logo.jpeg" alt="Logo" class="header-logo">
+        <span>Arokiya Annai Blessed Flair Centre</span>
+    </div>
     
     <div class="container animate-scale slide-page">
         <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; background: var(--card-bg); padding: 15px; border-radius: var(--border-radius-lg); box-shadow: var(--shadow-md);">
@@ -26,6 +30,10 @@
         </div>
     </div>
 
+    <a href="https://wa.me/917548822653" target="_blank" class="floating-wa">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+
     <div class="bottom-nav">
         <a href="index.html"><i class="fa-solid fa-house"></i>Home</a>
         <a href="profiles.html"><i class="fa-solid fa-users"></i>Profiles</a>
@@ -33,6 +41,16 @@
     </div>
 
     <script>
+        let touchstartX = 0, touchendX = 0;
+        const pages = ['index.html', 'profiles.html', 'videos.html'];
+        let currentIndex = pages.indexOf('videos.html');
+        document.addEventListener('touchstart', e => touchstartX = e.changedTouches.screenX);
+        document.addEventListener('touchend', e => { 
+            touchendX = e.changedTouches.screenX; 
+            if (touchendX < touchstartX - 75 && currentIndex < pages.length - 1) window.location.href = pages[currentIndex + 1];
+            if (touchendX > touchstartX + 75 && currentIndex > 0) window.location.href = pages[currentIndex - 1];
+        });
+
         const YOUTUBE_CHANNEL_ID = "UCDspH0ysu97UO4dmJ8wNcMw"; 
         const rssUrl = encodeURIComponent(`https://www.youtube.com/feeds/videos.xml?channel_id=${YOUTUBE_CHANNEL_ID}`);
         const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${rssUrl}`;
@@ -56,7 +74,7 @@
                                     </div>
                                     <div class="video-info">
                                         <h4 style="font-size: 16px; margin-bottom: 5px; color: var(--text-main); line-height: 1.3;">${video.title}</h4>
-                                        <p style="font-size: 12px; color: var(--text-light);"><i class="fa-regular fa-calendar"></i> ${video.pubDate.split(' ')[0]}</p>
+                                        <p style="font-size: 12px; color: var(--text-light);"><i class="fa-regular fa-calendar"></i> ${video.pubDate.split(' ')}</p>
                                     </div>
                                 </div>
                             </a>
