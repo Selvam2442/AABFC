@@ -3,26 +3,82 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Arokiya Annai Blessed Flair Centre</title>
-    <link rel="icon" type="image/jpeg" href="logo.jpeg">
+    <title>AABFC - Arokiya Annai Blessed Flair Center</title>
+    <link rel="icon" type="image/png" href="logo.jpeg">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <div class="header animate-up">
-        <img src="logo.jpeg" alt="Logo" class="header-logo">
-        <span>Arokiya Annai Blessed Flair Centre</span>
+    <div class="header" id="main-header">
+        <div class="header-top">
+            <img src="logo.png" alt="Logo" class="header-logo">
+            <span>AABFC</span>
+        </div>
+        <div class="page-nav">
+            <a href="#centre"><i class="fa-solid fa-crown"></i> Centre</a>
+            <a href="#head"><i class="fa-solid fa-user-tie"></i> Head</a>
+            <a href="#staff"><i class="fa-solid fa-users-gear"></i> Staff</a>
+        </div>
     </div>
     
-    <div class="container animate-up" style="animation-delay: 0.1s;">
-        <div class="form-card" style="text-align: center;">
-            <h2 style="font-size: 24px; margin-bottom: 10px; color: var(--text-main);">Welcome</h2>
-            <p style="color: var(--text-light); margin-bottom: 25px;">Access student portfolios, achievements, and professional video content.</p>
-            
-            <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=400&q=80" alt="Students" style="width: 100%; border-radius: 12px; margin-bottom: 25px; box-shadow: var(--shadow-md);">
-            
-            <a href="registration.html" class="btn"><i class="fa-solid fa-user-plus"></i> Register Now</a>
+    <div class="container">
+        <div class="slideshow-container animate-scale">
+            <div class="slide active" style="background-image: url('slide1.png'); background-color: #1a0f0f;">
+                <div class="slide-overlay"><h3>Welcome to our Centre</h3></div>
+            </div>
+            <div class="slide" style="background-image: url('slide2.png'); background-color: #221a0f;">
+                <div class="slide-overlay"><h3>Empowering Students</h3></div>
+            </div>
+            <div class="slide" style="background-image: url('slide3.png'); background-color: #0f1a1a;">
+                <div class="slide-overlay"><h3>Professional Excellence</h3></div>
+            </div>
         </div>
+
+        <div class="glass-card form-card animate-up" style="text-align: center; margin-bottom: 40px; animation-delay: 0.2s;">
+            <h2 style="font-size: 22px; margin-bottom: 15px; color: var(--primary); text-transform: uppercase; letter-spacing: 1px;"><i class="fa-solid fa-gem"></i> Join Our Roster</h2>
+            <p style="color: var(--text-light); margin-bottom: 25px;">Register now to access student portfolios and premium media feeds.</p>
+            <a href="registration.html" class="btn"><i class="fa-solid fa-user-plus"></i> Application Form</a>
+        </div>
+
+        <section id="centre" class="content-section animate-up" style="animation-delay: 0.3s;">
+            <h2><i class="fa-solid fa-crown"></i> About The Centre</h2>
+            <div class="glass-card content-card">
+                <p>Welcome to the <strong>Arokiya Annai Blessed Flair Center</strong> in Kamanaickenpatti. We are dedicated to providing a premier environment for student growth, artistic flair, and technical development. Our mission is to nurture talent and showcase professional achievements on a modern platform, guided by grace and excellence.</p>
+            </div>
+        </section>
+
+        <section id="head" class="content-section animate-up" style="animation-delay: 0.4s;">
+            <h2><i class="fa-solid fa-user-tie"></i> Head of Center</h2>
+            <div class="glass-card content-card" style="display: flex; gap: 20px; align-items: center; flex-wrap: wrap;">
+                <div class="profile-avatar" style="width: 100px; height: 100px; margin: 0;">
+                    <img src="https://ui-avatars.com/api/?name=Head&background=D4AF37&color=000&size=200" alt="Head">
+                </div>
+                <div style="flex: 1; min-width: 200px;">
+                    <h3 style="color: white; margin-bottom: 5px; font-size: 18px;">Director's Message</h3>
+                    <p style="font-size: 14px; color: var(--text-light);">Leading with a vision of excellence, our administration ensures that every student receives the guidance needed to succeed in their professional and creative endeavors.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="staff" class="content-section animate-up" style="animation-delay: 0.5s;">
+            <h2><i class="fa-solid fa-users-gear"></i> Our Faculty</h2>
+            <div class="staff-grid">
+                <div class="glass-card profile-card" style="padding: 20px 10px;">
+                    <div class="profile-avatar" style="width: 70px; height: 70px;">
+                        <img src="https://ui-avatars.com/api/?name=Faculty+One&background=8B0000&color=fff" alt="Staff">
+                    </div>
+                    <h4 style="font-size: 14px; margin-bottom: 3px;">Staff Name</h4>
+                    <p style="font-size: 11px; color: var(--primary); text-transform: uppercase;">Instructor</p>
+                </div>
+                <div class="glass-card profile-card" style="padding: 20px 10px;">
+                    <div class="profile-avatar" style="width: 70px; height: 70px;">
+                        <img src="https://ui-avatars.com/api/?name=Faculty+Two&background=8B0000&color=fff" alt="Staff">
+                    </div>
+                    <h4 style="font-size: 14px; margin-bottom: 3px;">Staff Name</h4>
+                    <p style="font-size: 11px; color: var(--primary); text-transform: uppercase;">Coordinator</p>
+                </div>
+            </div>
+        </section>
     </div>
 
     <a href="https://wa.me/917548822653" target="_blank" class="floating-wa">
@@ -36,12 +92,30 @@
     </div>
 
     <script>
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('main-header');
+            if (window.scrollY > 50) { header.classList.add('scrolled'); } 
+            else { header.classList.remove('scrolled'); }
+        });
+
+        let slideIndex = 0;
+        const slides = document.querySelectorAll('.slide');
+        function showSlides() {
+            slides.forEach(slide => slide.classList.remove('active'));
+            slideIndex++;
+            if (slideIndex > slides.length) { slideIndex = 1; }
+            slides[slideIndex - 1].classList.add('active');
+            setTimeout(showSlides, 4500);
+        }
+        if(slides.length > 0) { showSlides(); }
+
         let touchstartX = 0, touchendX = 0;
         const pages = ['index.html', 'profiles.html', 'videos.html'];
         let currentIndex = pages.indexOf('index.html');
-        document.addEventListener('touchstart', e => touchstartX = e.changedTouches.screenX);
+        document.addEventListener('touchstart', e => touchstartX = e.changedTouches[0].screenX);
         document.addEventListener('touchend', e => { 
-            touchendX = e.changedTouches.screenX; 
+            touchendX = e.changedTouches[0].screenX; 
+            if(e.target.closest('.page-nav') || e.target.closest('.staff-grid')) return;
             if (touchendX < touchstartX - 75 && currentIndex < pages.length - 1) window.location.href = pages[currentIndex + 1];
             if (touchendX > touchstartX + 75 && currentIndex > 0) window.location.href = pages[currentIndex - 1];
         });
