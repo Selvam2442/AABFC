@@ -3,16 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Profile</title>
-    <link rel="icon" type="image/jpeg" href="logo.jpeg">
+    <title>Student Profile - AABFC</title>
+    <link rel="icon" type="image/png" href="logo.png">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
 </head>
 <body>
-    <div class="header">
-        <img src="logo.jpeg" alt="Logo" class="header-logo">
-        <span id="header-title">Loading Portfolio...</span>
+    <div class="header" id="main-header">
+        <div class="header-top" style="margin-bottom: 0;">
+            <img src="logo.png" alt="Logo" class="header-logo">
+            <span id="header-title">Loading Portfolio...</span>
+        </div>
     </div>
     
     <div class="container animate-scale slide-page">
@@ -20,7 +21,7 @@
             <div class="profile-avatar" style="width: 100px; height: 100px;">
                 <img id="dynamic-avatar" src="" alt="Profile">
             </div>
-            <h2 id="student-name" style="color: var(--text-main);">Loading...</h2>
+            <h2 id="student-name" style="color: var(--accent);">Loading...</h2>
         </div>
         
         <div class="tabs">
@@ -28,24 +29,29 @@
             <button class="tab-btn" onclick="openTab('achievements')"><i class="fa-solid fa-award"></i> Achievements</button>
         </div>
 
-        <div id="paintings" class="tab-content active">
+        <div id="paintings" class="tab-content glass-card active">
             <div id="paintings-container">
-                <div class="loader"><i class="fa-solid fa-circle-notch fa-spin"></i> Loading repository...</div>
+                <div class="loader"><i class="fa-solid fa-circle-notch fa-spin fa-2x"></i> <span style="margin-top: 10px;">Loading repository...</span></div>
             </div>
         </div>
 
-        <div id="achievements" class="tab-content">
+        <div id="achievements" class="tab-content glass-card">
             <div id="achievements-container">
-                <div class="loader"><i class="fa-solid fa-circle-notch fa-spin"></i> Loading repository...</div>
+                <div class="loader"><i class="fa-solid fa-circle-notch fa-spin fa-2x"></i> <span style="margin-top: 10px;">Loading repository...</span></div>
             </div>
         </div>
 
-        <a href="profiles.html" class="btn" style="background: var(--text-light); margin-top: 25px;"><i class="fa-solid fa-arrow-left"></i> Back to Roster</a>
+        <a href="profiles.html" class="btn" style="background: white; color: var(--accent); border: 2px solid var(--accent); box-shadow: none; margin-top: 25px;"><i class="fa-solid fa-arrow-left"></i> Back to Roster</a>
     </div>
 
-    <a href="https://wa.me/917548822653" target="_blank" class="floating-wa">
-        <i class="fa-brands fa-whatsapp"></i>
-    </a>
+    <a href="https://wa.me/917548822653" target="_blank" class="floating-wa"><i class="fa-brands fa-whatsapp"></i></a>
+
+    <div class="bottom-nav">
+        <a href="index.html"><i class="fa-solid fa-house"></i>Home</a>
+        <a href="profiles.html" class="active"><i class="fa-solid fa-users"></i>Profiles</a>
+        <a href="gallery.html"><i class="fa-solid fa-image"></i>Gallery</a>
+        <a href="videos.html"><i class="fa-solid fa-play"></i>Videos</a>
+    </div>
 
     <script>
         function openTab(tabName) {
@@ -62,9 +68,10 @@
 
         document.getElementById('student-name').innerText = studentName;
         document.getElementById('header-title').innerText = studentName + " Portfolio";
-        document.title = studentName + " - Arokiya Annai";
-        document.getElementById('dynamic-avatar').src = `https://ui-avatars.com/api/?name=${studentName}&background=random&color=fff&size=256`;
+        document.title = studentName + " - AABFC";
+        document.getElementById('dynamic-avatar').src = `https://ui-avatars.com/api/?name=${studentName}&background=8B0000&color=fff&size=256`;
 
+        // EXACT APPS SCRIPT URL
         const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyfyKNm1lUecFRhi7clz4rENlfCxyDGZQDHevcXSm8e5CNE00meMk9_0Zp8n9wVkw8huw/exec"; 
 
         fetch(SCRIPT_URL + "?name=" + studentName)

@@ -3,31 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Profiles - Arokiya Annai</title>
-    <link rel="icon" type="image/jpeg" href="logo.jpeg">
+    <title>Student Profiles - AABFC</title>
+    <link rel="icon" type="image/png" href="logo.png">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
     <div class="header">
-        <img src="logo.jpeg" alt="Logo" class="header-logo">
-        <span>Arokiya Annai Blessed Flair Centre</span>
+        <div class="header-top" style="margin-bottom: 0;">
+            <img src="logo.png" alt="Logo" class="header-logo">
+            <span>AABFC Roster</span>
+        </div>
     </div>
     
     <div class="container animate-up slide-page">
         <div class="profile-grid">
             
-            <a href="profile.html?student=Selvam" class="profile-card">
+            <a href="profile.html?student=Selvam" class="glass-card profile-card">
                 <div class="profile-avatar">
-                    <img src="https://ui-avatars.com/api/?name=Selvam&background=25D366&color=fff&size=128" alt="Selvam">
+                    <img src="https://ui-avatars.com/api/?name=Selvam&background=D4AF37&color=fff&size=128" alt="Selvam">
                 </div>
                 <h3>Selvam</h3>
                 <p style="font-size: 12px; color: var(--text-light); margin-top: 5px;">View Portfolio</p>
             </a>
 
-            <a href="profile.html?student=Antony" class="profile-card">
+            <a href="profile.html?student=Antony" class="glass-card profile-card">
                 <div class="profile-avatar">
-                    <img src="https://ui-avatars.com/api/?name=Antony&background=128C7E&color=fff&size=128" alt="Antony">
+                    <img src="https://ui-avatars.com/api/?name=Antony&background=8B0000&color=fff&size=128" alt="Antony">
                 </div>
                 <h3>Antony</h3>
                 <p style="font-size: 12px; color: var(--text-light); margin-top: 5px;">View Portfolio</p>
@@ -36,25 +38,31 @@
         </div>
     </div>
 
-    <a href="https://wa.me/917548822653" target="_blank" class="floating-wa">
-        <i class="fa-brands fa-whatsapp"></i>
-    </a>
+    <a href="https://wa.me/917548822653" target="_blank" class="floating-wa"><i class="fa-brands fa-whatsapp"></i></a>
 
     <div class="bottom-nav">
         <a href="index.html"><i class="fa-solid fa-house"></i>Home</a>
         <a href="profiles.html" class="active"><i class="fa-solid fa-users"></i>Profiles</a>
+        <a href="gallery.html"><i class="fa-solid fa-image"></i>Gallery</a>
         <a href="videos.html"><i class="fa-solid fa-play"></i>Videos</a>
     </div>
 
     <script>
-        let touchstartX = 0, touchendX = 0;
-        const pages = ['index.html', 'profiles.html', 'videos.html'];
-        let currentIndex = pages.indexOf('profiles.html');
-        document.addEventListener('touchstart', e => touchstartX = e.changedTouches.screenX);
-        document.addEventListener('touchend', e => { 
-            touchendX = e.changedTouches.screenX; 
-            if (touchendX < touchstartX - 75 && currentIndex < pages.length - 1) window.location.href = pages[currentIndex + 1];
-            if (touchendX > touchstartX + 75 && currentIndex > 0) window.location.href = pages[currentIndex - 1];
+        document.addEventListener('DOMContentLoaded', () => {
+            let touchstartX = 0, touchendX = 0;
+            const pages = ['index.html', 'profiles.html', 'gallery.html', 'videos.html'];
+            let currentPage = window.location.pathname.split('/').pop().split('?')[0];
+            if (!currentPage || currentPage === '') currentPage = 'index.html';
+            let currentIndex = pages.indexOf(currentPage);
+
+            document.addEventListener('touchstart', e => { touchstartX = e.changedTouches[0].screenX; }, {passive: true});
+            document.addEventListener('touchend', e => { 
+                touchendX = e.changedTouches[0].screenX; 
+                if (currentIndex === -1) return; 
+                let diff = touchstartX - touchendX;
+                if (diff > 75 && currentIndex < pages.length - 1) window.location.href = pages[currentIndex + 1]; 
+                else if (diff < -75 && currentIndex > 0) window.location.href = pages[currentIndex - 1]; 
+            }, {passive: true});
         });
     </script>
 </body>

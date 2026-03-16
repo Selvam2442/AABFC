@@ -3,20 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registration - Arokiya Annai</title>
-    <link rel="icon" type="image/jpeg" href="logo.jpeg">
+    <title>Registration - AABFC</title>
+    <link rel="icon" type="image/png" href="logo.png">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
     <div class="header">
-        <img src="logo.jpeg" alt="Logo" class="header-logo">
-        <span>Arokiya Annai Blessed Flair Centre</span>
+        <div class="header-top" style="margin-bottom: 0;">
+            <img src="logo.png" alt="Logo" class="header-logo">
+            <span>AABFC Registration</span>
+        </div>
     </div>
     
     <div class="container animate-scale slide-page">
-        <div class="form-card">
-            <h3 style="margin-bottom: 25px; text-align: center; color: var(--text-main);">Student Registration</h3>
+        <div class="glass-card form-card">
+            <h3 style="margin-bottom: 25px; text-align: center; color: var(--primary); text-transform: uppercase;"><i class="fa-solid fa-file-signature"></i> Student Application</h3>
             
             <div class="form-group">
                 <input type="text" id="name" placeholder="Full Name (Required)" required>
@@ -39,12 +41,20 @@
                 <i class="fa-solid fa-envelope input-icon"></i>
             </div>
             
-            <button class="btn" onclick="sendToWhatsApp()"><i class="fa-brands fa-whatsapp"></i> Submit Registration</button>
+            <button class="btn" onclick="sendToWhatsApp()"><i class="fa-brands fa-whatsapp"></i> Submit Application</button>
             <a href="index.html" style="display:block; text-align:center; margin-top:20px; color:var(--text-light); text-decoration: none; font-weight: 600;"><i class="fa-solid fa-arrow-left"></i> Return Home</a>
         </div>
     </div>
 
+    <div class="bottom-nav">
+        <a href="index.html"><i class="fa-solid fa-house"></i>Home</a>
+        <a href="profiles.html"><i class="fa-solid fa-users"></i>Profiles</a>
+        <a href="gallery.html"><i class="fa-solid fa-image"></i>Gallery</a>
+        <a href="videos.html"><i class="fa-solid fa-play"></i>Videos</a>
+    </div>
+
     <script>
+        // Bulletproof swipe disabled on form to prevent accidental leaving while typing
         function sendToWhatsApp() {
             let name = document.getElementById('name').value;
             let age = document.getElementById('age').value;
@@ -57,7 +67,7 @@
                 return;
             }
 
-            let message = `*New Registration Application*\n\n*Name:* ${name}\n*Age:* ${age}\n*Class:* ${studentClass}\n*Phone:* ${phone}\n*Email:* ${email ? email : 'Not provided'}`;
+            let message = `*AABFC New Registration*\n\n*Name:* ${name}\n*Age:* ${age}\n*Class:* ${studentClass}\n*Phone:* ${phone}\n*Email:* ${email ? email : 'Not provided'}`;
             let whatsappUrl = `https://wa.me/916380466535?text=${encodeURIComponent(message)}`;
             window.open(whatsappUrl, '_blank');
         }
