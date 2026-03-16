@@ -54,7 +54,7 @@
             isLightboxOpen = true;
             const lb = document.getElementById('lightbox');
             lb.classList.add('active');
-            updateLightboxContent('scale(0.9)'); // Entrance animation
+            updateLightboxContent('scale(0.9)'); 
         }
 
         function closeLightbox() {
@@ -66,8 +66,6 @@
             currentPhotoIndex += step;
             if (currentPhotoIndex < 0) currentPhotoIndex = galleryImages.length - 1;
             if (currentPhotoIndex >= galleryImages.length) currentPhotoIndex = 0;
-            
-            // Add a cool slide animation based on direction
             let transformDir = step > 0 ? 'translateX(30px)' : 'translateX(-30px)';
             updateLightboxContent(transformDir);
         }
@@ -85,9 +83,7 @@
             }, 50);
         }
 
-        // ==========================================
-        // YOUR EXACT GOOGLE APPS SCRIPT URL:
-        // ==========================================
+        // EXACT SCRIPT URL
         const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyfyKNm1lUecFRhi7clz4rENlfCxyDGZQDHevcXSm8e5CNE00meMk9_0Zp8n9wVkw8huw/exec"; 
 
         fetch(SCRIPT_URL + "?action=gallery")
@@ -119,7 +115,7 @@
                 document.getElementById('gallery-container').innerHTML = "<div class='glass-card' style='grid-column: 1 / -1; padding:30px; text-align:center; color: var(--accent);'><i class='fa-solid fa-triangle-exclamation fa-2x'></i><p style='margin-top:10px;'>Secure sync failed.</p></div>";
             });
 
-        // App-Level Interactions (Swipes & Keystrokes)
+        // App-Level Interactions
         document.addEventListener('DOMContentLoaded', () => {
             window.addEventListener('scroll', function() {
                 const header = document.getElementById('main-header');
@@ -127,16 +123,17 @@
                 else header.classList.remove('scrolled');
             });
 
+            // GITHUB BULLETPROOF SWIPE
             let pageTouchStartX = 0, pageTouchEndX = 0;
             const pages = ['index.html', 'profiles.html', 'gallery.html', 'videos.html'];
+            
             let currentPage = window.location.pathname.split('/').pop().split('?')[0];
-            if (!currentPage || currentPage === '') currentPage = 'index.html';
+            if (!pages.includes(currentPage)) { currentPage = 'index.html'; }
             let currentIndex = pages.indexOf(currentPage);
 
             let lbTouchStartX = 0, lbTouchEndX = 0;
             const lightbox = document.getElementById('lightbox');
 
-            // Page Swiping (Disabled if lightbox is open)
             document.addEventListener('touchstart', e => { pageTouchStartX = e.changedTouches[0].screenX; }, {passive: true});
             document.addEventListener('touchend', e => { 
                 if (isLightboxOpen) return; 
@@ -147,7 +144,6 @@
                 else if (diff < -75 && currentIndex > 0) window.location.href = pages[currentIndex - 1]; 
             }, {passive: true});
 
-            // Lightbox Photo Swiping (Mobile)
             lightbox.addEventListener('touchstart', e => { lbTouchStartX = e.changedTouches[0].screenX; }, {passive: true});
             lightbox.addEventListener('touchend', e => { 
                 if (!isLightboxOpen) return;
@@ -157,17 +153,11 @@
                 else if (diff < -50) changePhoto(-1); 
             }, {passive: true});
 
-            // PC Keyboard Navigation (Arrows & Escape)
             document.addEventListener('keydown', (e) => {
-                if (!isLightboxOpen) return; // Only trigger if the gallery is in full screen
-                
-                if (e.key === 'ArrowRight') {
-                    changePhoto(1);
-                } else if (e.key === 'ArrowLeft') {
-                    changePhoto(-1);
-                } else if (e.key === 'Escape') {
-                    closeLightbox();
-                }
+                if (!isLightboxOpen) return;
+                if (e.key === 'ArrowRight') changePhoto(1);
+                else if (e.key === 'ArrowLeft') changePhoto(-1);
+                else if (e.key === 'Escape') closeLightbox();
             });
         });
     </script>

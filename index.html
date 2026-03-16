@@ -94,8 +94,8 @@
         document.addEventListener('DOMContentLoaded', () => {
             window.addEventListener('scroll', function() {
                 const header = document.getElementById('main-header');
-                if (window.scrollY > 50) header.classList.add('scrolled'); 
-                else header.classList.remove('scrolled');
+                if (window.scrollY > 50) { header.classList.add('scrolled'); } 
+                else { header.classList.remove('scrolled'); }
             });
 
             let slideIndex = 0;
@@ -103,24 +103,25 @@
             function showSlides() {
                 slides.forEach(slide => slide.classList.remove('active'));
                 slideIndex++;
-                if (slideIndex > slides.length) slideIndex = 1;
+                if (slideIndex > slides.length) { slideIndex = 1; }
                 slides[slideIndex - 1].classList.add('active');
                 setTimeout(showSlides, 4500);
             }
-            if(slides.length > 0) showSlides();
+            if(slides.length > 0) { showSlides(); }
 
+            // GITHUB BULLETPROOF SWIPE
             let touchstartX = 0, touchendX = 0;
             const pages = ['index.html', 'profiles.html', 'gallery.html', 'videos.html'];
+            
             let currentPage = window.location.pathname.split('/').pop().split('?')[0];
-            if (!currentPage || currentPage === '') currentPage = 'index.html';
+            if (!pages.includes(currentPage)) { currentPage = 'index.html'; }
             let currentIndex = pages.indexOf(currentPage);
 
             document.addEventListener('touchstart', e => { touchstartX = e.changedTouches[0].screenX; }, {passive: true});
             document.addEventListener('touchend', e => { 
                 touchendX = e.changedTouches[0].screenX; 
-                if(e.target.closest('.page-nav') || e.target.closest('.staff-grid') || e.target.closest('.slideshow-container')) return; 
+                if(e.target.closest('.page-nav') || e.target.closest('.staff-grid') || e.target.closest('.slideshow-container')) return;
                 if (currentIndex === -1) return; 
-                
                 let diff = touchstartX - touchendX;
                 if (diff > 75 && currentIndex < pages.length - 1) window.location.href = pages[currentIndex + 1]; 
                 else if (diff < -75 && currentIndex > 0) window.location.href = pages[currentIndex - 1]; 

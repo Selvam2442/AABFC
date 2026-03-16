@@ -49,10 +49,12 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            // GITHUB BULLETPROOF SWIPE
             let touchstartX = 0, touchendX = 0;
             const pages = ['index.html', 'profiles.html', 'gallery.html', 'videos.html'];
+            
             let currentPage = window.location.pathname.split('/').pop().split('?')[0];
-            if (!currentPage || currentPage === '') currentPage = 'index.html';
+            if (!pages.includes(currentPage)) { currentPage = 'index.html'; }
             let currentIndex = pages.indexOf(currentPage);
 
             document.addEventListener('touchstart', e => { touchstartX = e.changedTouches[0].screenX; }, {passive: true});
