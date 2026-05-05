@@ -22,6 +22,7 @@
                 <img id="dynamic-avatar" src="" alt="Profile">
             </div>
             <h2 id="student-name" style="color: var(--accent);">Loading...</h2>
+            <p style="color: var(--text-light); font-size: 13px; margin-top: 5px;">Tap any image to view in full screen.</p>
         </div>
         
         <div class="tabs">
@@ -30,18 +31,26 @@
         </div>
 
         <div id="paintings" class="tab-content glass-card active">
-            <div id="paintings-container">
-                <div class="loader"><i class="fa-solid fa-circle-notch fa-spin fa-2x"></i> <span style="margin-top: 10px;">Loading repository...</span></div>
+            <div id="paintings-container" class="photo-grid">
+                <div class="loader" style="grid-column: 1 / -1;"><i class="fa-solid fa-circle-notch fa-spin fa-2x"></i> <span style="margin-top: 10px;">Loading portfolio...</span></div>
             </div>
         </div>
 
         <div id="achievements" class="tab-content glass-card">
-            <div id="achievements-container">
-                <div class="loader"><i class="fa-solid fa-circle-notch fa-spin fa-2x"></i> <span style="margin-top: 10px;">Loading repository...</span></div>
+            <div id="achievements-container" class="photo-grid">
+                <div class="loader" style="grid-column: 1 / -1;"><i class="fa-solid fa-circle-notch fa-spin fa-2x"></i> <span style="margin-top: 10px;">Loading records...</span></div>
             </div>
         </div>
 
-        <a href="profiles.html" class="btn" style="background: white; color: var(--accent); border: 2px solid var(--accent); box-shadow: none; margin-top: 25px;"><i class="fa-solid fa-arrow-left"></i> Back to Roster</a>
+        <a href="profiles.html" class="btn" style="background: white; color: var(--accent); border: 2px solid var(--accent); box-shadow: none; margin-top: 35px;"><i class="fa-solid fa-arrow-left"></i> Back to Roster</a>
+    </div>
+
+    <div id="lightbox" onclick="if(event.target.id === 'lightbox') closeLightbox()">
+        <div class="lb-close" onclick="closeLightbox()"><i class="fa-solid fa-xmark"></i></div>
+        <div class="lb-nav lb-prev" onclick="changePhoto(-1)"><i class="fa-solid fa-chevron-left"></i></div>
+        <img id="lb-img" src="" alt="Full Screen Photo">
+        <div class="lb-nav lb-next" onclick="changePhoto(1)"><i class="fa-solid fa-chevron-right"></i></div>
+        <p id="lb-desc"></p>
     </div>
 
     <a href="https://wa.me/917548822653" target="_blank" class="floating-wa"><i class="fa-brands fa-whatsapp"></i></a>
@@ -54,6 +63,7 @@
     </div>
 
     <script>
+        // Tab switching logic
         function openTab(tabName) {
             let tabcontent = document.getElementsByClassName("tab-content");
             for (let i = 0; i < tabcontent.length; i++) tabcontent[i].classList.remove("active");
@@ -63,6 +73,7 @@
             event.currentTarget.classList.add("active");
         }
 
+        // Profile Loading Setup
         const urlParams = new URLSearchParams(window.location.search);
         const studentName = urlParams.get('student') || 'Student';
 
@@ -71,7 +82,56 @@
         document.title = studentName + " - AABFC";
         document.getElementById('dynamic-avatar').src = `https://ui-avatars.com/api/?name=${studentName}&background=8B0000&color=fff&size=256`;
 
-        // EXACT SCRIPT URL
+        // ==========================================
+        // LIGHTBOX LOGIC FOR PROFILE PICTURES
+        // ==========================================
+        let paintingsData = [];
+        let achievementsData = [];
+        let currentLightboxData = [];
+        let currentPhotoIndex = 0;
+        let isLightboxOpen = false;
+
+        function openLightbox(type, index) {
+            // Figure out if they clicked a painting or achievement
+            currentLightboxData = type === 'paintings' ? paintingsData : achievementsData;
+            currentPhotoIndex = index;
+            isLightboxOpen = true;
+            
+            const lb = document.getElementById('lightbox');
+            lb.classList.add('active');
+            updateLightboxContent('scale(0.9)'); 
+        }
+
+        function closeLightbox() {
+            isLightboxOpen = false;
+            document.getElementById('lightbox').classList.remove('active');
+        }
+
+        function changePhoto(step) {
+            currentPhotoIndex += step;
+            if (currentPhotoIndex < 0) currentPhotoIndex = currentLightboxData.length - 1;
+            if (currentPhotoIndex >= currentLightboxData.length) currentPhotoIndex = 0;
+            
+            let transformDir = step > 0 ? 'translateX(30px)' : 'translateX(-30px)';
+            updateLightboxContent(transformDir);
+        }
+
+        function updateLightboxContent(transformStart = 'scale(0.9)') {
+            const img = document.getElementById('lb-img');
+            img.style.transform = transformStart;
+            img.style.opacity = '0';
+            
+            setTimeout(() => {
+                img.src = currentLightboxData[currentPhotoIndex].img;
+                document.getElementById('lb-desc').innerText = currentLightboxData[currentPhotoIndex].desc;
+                img.style.transform = 'translateX(0) scale(1)';
+                img.style.opacity = '1';
+            }, 50);
+        }
+
+        // ==========================================
+        // FETCH DATA FROM GOOGLE DRIVE
+        // ==========================================
         const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyfyKNm1lUecFRhi7clz4rENlfCxyDGZQDHevcXSm8e5CNE00meMk9_0Zp8n9wVkw8huw/exec"; 
 
         fetch(SCRIPT_URL + "?name=" + studentName)
@@ -82,23 +142,76 @@
                 paintContainer.innerHTML = ''; achiContainer.innerHTML = '';
 
                 if(data.error) {
-                    paintContainer.innerHTML = `<p style='text-align:center; color:red;'>Directory for ${studentName} not found.</p>`;
-                    achiContainer.innerHTML = `<p style='text-align:center; color:red;'>Directory for ${studentName} not found.</p>`;
+                    paintContainer.innerHTML = `<p style='grid-column: 1 / -1; text-align:center; color:red;'>Directory for ${studentName} not found.</p>`;
+                    achiContainer.innerHTML = `<p style='grid-column: 1 / -1; text-align:center; color:red;'>Directory for ${studentName} not found.</p>`;
                     return;
                 }
 
+                // Process Paintings
                 if (data.paintings && data.paintings.length > 0) {
-                    data.paintings.forEach(item => { paintContainer.innerHTML += `<div class="gallery-item animate-up"><img src="${item.img}" alt="Artwork"><p>${item.desc}</p></div>`; });
-                } else { paintContainer.innerHTML = "<p style='text-align:center; color: var(--text-light);'>No records found.</p>"; }
+                    paintingsData = data.paintings; // Save to array for Lightbox
+                    data.paintings.forEach((item, index) => { 
+                        paintContainer.innerHTML += `
+                            <div class="photo-card animate-up" onclick="openLightbox('paintings', ${index})">
+                                <img src="${item.img}" alt="Artwork" loading="lazy">
+                                <p class="photo-desc">${item.desc}</p>
+                            </div>
+                        `; 
+                    });
+                } else { 
+                    paintContainer.innerHTML = "<p style='grid-column: 1 / -1; text-align:center; color: var(--text-light); padding: 20px;'>No artworks found.</p>"; 
+                }
 
+                // Process Achievements
                 if (data.achievements && data.achievements.length > 0) {
-                    data.achievements.forEach(item => { achiContainer.innerHTML += `<div class="gallery-item animate-up"><img src="${item.img}" alt="Certificate"><p>${item.desc}</p></div>`; });
-                } else { achiContainer.innerHTML = "<p style='text-align:center; color: var(--text-light);'>No records found.</p>"; }
+                    achievementsData = data.achievements; // Save to array for Lightbox
+                    data.achievements.forEach((item, index) => { 
+                        achiContainer.innerHTML += `
+                            <div class="photo-card animate-up" onclick="openLightbox('achievements', ${index})">
+                                <img src="${item.img}" alt="Certificate" loading="lazy">
+                                <p class="photo-desc">${item.desc}</p>
+                            </div>
+                        `; 
+                    });
+                } else { 
+                    achiContainer.innerHTML = "<p style='grid-column: 1 / -1; text-align:center; color: var(--text-light); padding: 20px;'>No records found.</p>"; 
+                }
             })
             .catch(error => {
-                document.getElementById('paintings-container').innerHTML = "<p style='text-align:center; color:red;'>Connection error.</p>";
-                document.getElementById('achievements-container').innerHTML = "<p style='text-align:center; color:red;'>Connection error.</p>";
+                document.getElementById('paintings-container').innerHTML = "<p style='grid-column: 1 / -1; text-align:center; color:red;'>Connection error.</p>";
+                document.getElementById('achievements-container').innerHTML = "<p style='grid-column: 1 / -1; text-align:center; color:red;'>Connection error.</p>";
             });
+
+        // App-Level Interactions (Header Scroll & Lightbox Swipes)
+        document.addEventListener('DOMContentLoaded', () => {
+            window.addEventListener('scroll', function() {
+                const header = document.getElementById('main-header');
+                if (window.scrollY > 50) header.classList.add('scrolled'); 
+                else header.classList.remove('scrolled');
+            });
+
+            const lightbox = document.getElementById('lightbox');
+            let lbTouchStartX = 0, lbTouchEndX = 0;
+
+            // Swiping on Mobile Lightbox
+            lightbox.addEventListener('touchstart', e => { lbTouchStartX = e.changedTouches[0].screenX; }, {passive: true});
+            lightbox.addEventListener('touchend', e => { 
+                if (!isLightboxOpen) return;
+                lbTouchEndX = e.changedTouches[0].screenX; 
+                let diff = lbTouchStartX - lbTouchEndX;
+                if (diff > 50) changePhoto(1); 
+                else if (diff < -50) changePhoto(-1); 
+            }, {passive: true});
+
+            // PC Keyboard Navigation
+            document.addEventListener('keydown', (e) => {
+                if (!isLightboxOpen) return;
+                if (e.key === 'ArrowRight') changePhoto(1);
+                else if (e.key === 'ArrowLeft') changePhoto(-1);
+                else if (e.key === 'Escape') closeLightbox();
+            });
+        });
     </script>
 </body>
 </html>
+
