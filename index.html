@@ -9,124 +9,176 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <div class="header" id="main-header">
-        <div class="header-top">
-            <img src="logo.png" alt="Logo" class="header-logo">
-            <span>AABFC</span>
+
+    <!-- TOP HEADER -->
+    <header class="top-header">
+        <div class="header-logos">
+            <img src="logo.png" alt="AABFC Logo">
         </div>
-        <div class="page-nav">
-            <a href="#centre"><i class="fa-solid fa-crown"></i> Centre</a>
-            <a href="#head"><i class="fa-solid fa-user-tie"></i> Head</a>
-            <a href="#staff"><i class="fa-solid fa-users-gear"></i> Staff</a>
+        <div class="header-text">
+            <h2>ஆரோக்கிய அன்னை ஆசீர்வதிக்கப்பட்ட திறமை மையம்</h2>
+            <h1>AROKIYA ANNAI BLESSED FLAIR CENTER</h1>
+            <p>(An Autonomous Body, Recognized Government of India - Tamil Nadu)</p>
+            <p>India's Best & Biggest Educational Training Organization</p>
         </div>
-    </div>
-    
+        <div class="header-logos">
+            <img src="https://upload.wikimedia.org/wikipedia/en/4/41/Flag_of_India.svg" alt="India Flag" style="width: 80px; height: auto; border: 1px solid #ccc;">
+        </div>
+    </header>
+
+    <!-- NAVIGATION MENU -->
+    <nav class="main-nav">
+        <ul>
+            <li><a href="index.html" class="active">Home</a></li>
+            <li><a href="profiles.html">Student Profiles</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="videos.html">Videos</a></li>
+            <li><a href="registration.html">Contact Us</a></li>
+        </ul>
+    </nav>
+
+    <!-- MAIN 3-COLUMN CONTAINER -->
     <div class="container">
-        <div class="slideshow-container animate-scale">
-            <div class="slide active" style="background-image: url('slide1.png');">
-                <div class="slide-overlay"><h3>Welcome to our Centre</h3></div>
+        
+        <!-- LEFT SIDEBAR -->
+        <aside class="left-sidebar">
+            <div class="sidebar-box">
+                <div class="sidebar-header">Menu</div>
+                <ul class="sidebar-menu">
+                    <li><a href="#">Mission & Vision</a></li>
+                    <li><a href="#">Our Goals</a></li>
+                    <li><a href="#">Aim & Objective</a></li>
+                    <li><a href="#">Our Scope</a></li>
+                    <li><a href="#">Functions of Center</a></li>
+                    <li><a href="#">Terms & Conditions</a></li>
+                    <li><a href="#">Recognition</a></li>
+                </ul>
             </div>
-            <div class="slide" style="background-image: url('slide2.png');">
-                <div class="slide-overlay"><h3>Empowering Students</h3></div>
+
+            <div class="sidebar-box">
+                <div class="sidebar-header">AABFC Information</div>
+                <ul class="sidebar-menu">
+                    <li><a href="#">Center Profile</a></li>
+                    <li><a href="#">Academic Calendar</a></li>
+                    <li><a href="#">General Information</a></li>
+                    <li><a href="#">Special Day Guide <span class="new">New</span></a></li>
+                    <li><a href="#">Exam Fees Structure <span class="new">New</span></a></li>
+                    <li><a href="#">Quality Policy</a></li>
+                </ul>
             </div>
-            <div class="slide" style="background-image: url('slide3.png');">
-                <div class="slide-overlay"><h3>Professional Excellence</h3></div>
+
+            <div class="sidebar-box">
+                <div class="sidebar-header">Student Section</div>
+                <ul class="sidebar-menu">
+                    <li><a href="#">Admission Procedure</a></li>
+                    <li><a href="#">Practical Record</a></li>
+                    <li><a href="#">Placement Registration Form</a></li>
+                    <li><a href="#">Certificate Verification</a></li>
+                    <li><a href="#">Workshops</a></li>
+                </ul>
             </div>
-        </div>
-
-        <div class="glass-card form-card animate-up" style="text-align: center; margin-bottom: 40px; animation-delay: 0.2s;">
-            <h2 style="font-size: 22px; margin-bottom: 15px; color: var(--accent); text-transform: uppercase; letter-spacing: 1px;"><i class="fa-solid fa-gem"></i> Join Our Roster</h2>
-            <p style="color: var(--text-light); margin-bottom: 25px;">Register now to access student portfolios and premium media feeds.</p>
-            <a href="registration.html" class="btn"><i class="fa-solid fa-user-plus"></i> Application Form</a>
-        </div>
-
-        <section id="centre" class="content-section animate-up" style="animation-delay: 0.3s;">
-            <h2><i class="fa-solid fa-crown"></i> About The Center</h2>
-            <div class="glass-card content-card">
-                <p>Welcome to the <strong>Arokiya Annai Blessed Flair Center</strong> in Kamanaickenpatti. We are dedicated to providing a premier environment for student growth, artistic flair, and technical development. Our mission is to nurture talent and showcase professional achievements on a modern platform, guided by grace and excellence.</p>
-            </div>
-        </section>
-
-        <section id="head" class="content-section animate-up" style="animation-delay: 0.4s;">
-            <h2><i class="fa-solid fa-user-tie"></i> Head of Center</h2>
-            <div class="glass-card content-card" style="display: flex; gap: 20px; align-items: center; flex-wrap: wrap;">
-                <div class="profile-avatar" style="width: 100px; height: 100px; margin: 0;">
-                    <img src="https://ui-avatars.com/api/?name=Head&background=8B0000&color=fff&size=200" alt="Head">
-                </div>
-                <div style="flex: 1; min-width: 200px;">
-                    <h3 style="color: var(--accent); margin-bottom: 5px; font-size: 18px;">Director's Message</h3>
-                    <p style="font-size: 14px; color: var(--text-main);">Leading with a vision of excellence, our administration ensures that every student receives the guidance needed to succeed in their professional and creative endeavors.</p>
-                </div>
-            </div>
-        </section>
-
-        <section id="staff" class="content-section animate-up" style="animation-delay: 0.5s;">
-            <h2><i class="fa-solid fa-users-gear"></i> Our Faculty</h2>
-            <div class="staff-grid">
-                <div class="glass-card profile-card" style="padding: 20px 10px;">
-                    <div class="profile-avatar" style="width: 70px; height: 70px;">
-                        <img src="https://ui-avatars.com/api/?name=Faculty+One&background=D4AF37&color=fff" alt="Staff">
-                    </div>
-                    <h4 style="font-size: 14px; margin-bottom: 3px;">Staff Name</h4>
-                    <p style="font-size: 11px; color: var(--accent); text-transform: uppercase;">Instructor</p>
-                </div>
-                <div class="glass-card profile-card" style="padding: 20px 10px;">
-                    <div class="profile-avatar" style="width: 70px; height: 70px;">
-                        <img src="https://ui-avatars.com/api/?name=Faculty+Two&background=D4AF37&color=fff" alt="Staff">
-                    </div>
-                    <h4 style="font-size: 14px; margin-bottom: 3px;">Staff Name</h4>
-                    <p style="font-size: 11px; color: var(--accent); text-transform: uppercase;">Coordinator</p>
-                </div>
-            </div>
-        </section>
-    </div>
-
-    <a href="https://wa.me/917548822653" target="_blank" class="floating-wa"><i class="fa-brands fa-whatsapp"></i></a>
-
-    <div class="bottom-nav">
-        <a href="index.html" class="active"><i class="fa-solid fa-house"></i>Home</a>
-        <a href="profiles.html"><i class="fa-solid fa-users"></i>Profiles</a>
-        <a href="gallery.html"><i class="fa-solid fa-image"></i>Gallery</a>
-        <a href="videos.html"><i class="fa-solid fa-play"></i>Videos</a>
-    </div>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            window.addEventListener('scroll', function() {
-                const header = document.getElementById('main-header');
-                if (window.scrollY > 50) { header.classList.add('scrolled'); } 
-                else { header.classList.remove('scrolled'); }
-            });
-
-            let slideIndex = 0;
-            const slides = document.querySelectorAll('.slide');
-            function showSlides() {
-                slides.forEach(slide => slide.classList.remove('active'));
-                slideIndex++;
-                if (slideIndex > slides.length) { slideIndex = 1; }
-                slides[slideIndex - 1].classList.add('active');
-                setTimeout(showSlides, 4500);
-            }
-            if(slides.length > 0) { showSlides(); }
-
-            // GITHUB BULLETPROOF SWIPE
-            let touchstartX = 0, touchendX = 0;
-            const pages = ['index.html', 'profiles.html', 'gallery.html', 'videos.html'];
             
-            let currentPage = window.location.pathname.split('/').pop().split('?')[0];
-            if (!pages.includes(currentPage)) { currentPage = 'index.html'; }
-            let currentIndex = pages.indexOf(currentPage);
+            <div style="text-align: center; margin-top: 20px;">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Skill_India_logo.svg/1200px-Skill_India_logo.svg.png" alt="Skill India" style="width: 120px;">
+            </div>
+        </aside>
 
-            document.addEventListener('touchstart', e => { touchstartX = e.changedTouches[0].screenX; }, {passive: true});
-            document.addEventListener('touchend', e => { 
-                touchendX = e.changedTouches[0].screenX; 
-                if(e.target.closest('.page-nav') || e.target.closest('.staff-grid') || e.target.closest('.slideshow-container')) return;
-                if (currentIndex === -1) return; 
-                let diff = touchstartX - touchendX;
-                if (diff > 75 && currentIndex < pages.length - 1) window.location.href = pages[currentIndex + 1]; 
-                else if (diff < -75 && currentIndex > 0) window.location.href = pages[currentIndex - 1]; 
-            }, {passive: true});
-        });
-    </script>
+        <!-- CENTER CONTENT AREA -->
+        <main class="content-area">
+            <div class="content-header">Welcome to Arokiya Annai Blessed Flair Center</div>
+            
+            <div class="slider-placeholder">
+                <img src="slide1.png" alt="Center Activities">
+            </div>
+
+            <div class="welcome-section">
+                <img src="logo.png" alt="AABFC Emblem">
+                <div class="welcome-text">
+                    <h3>Welcome</h3>
+                    <p><strong>AABFC Educational Council</strong> was established under the Constitution of India and incorporated under the legislation to promote vocational education and flair development. During historical educational commissions, it was insisted that manual and productive work should not only be an integral part of education but should center round it.</p>
+                    <p>Education is an endless process needed for the development of any nation. India being one of the developing countries concentrates on youth education as a maximum percent of youth are in our country. A better educated labour force is essential if we are to meet the supply requirements of faster growth.</p>
+                </div>
+            </div>
+            <p style="text-align: justify; font-size: 13px;">Education improves functional and analytical ability and thereby opens up opportunities for individuals and also groups to achieve greater access to labour markets and livelihoods. Skills and knowledge are the engines of economic growth and social development of any country. Countries with higher and better levels of knowledge and skills respond more effectively and promptly to challenges and opportunities of globalization.</p>
+        </main>
+
+        <!-- RIGHT SIDEBAR -->
+        <aside class="right-sidebar">
+            <div class="sidebar-box">
+                <div class="sidebar-header">Navigation</div>
+                <ul class="sidebar-menu">
+                    <li><a href="#">Course Details</a></li>
+                    <li><a href="#">Application for Affiliation <span class="new">New</span></a></li>
+                    <li><a href="#">Exam Time Table 2024</a></li>
+                    <li><a href="#">Regional Centers <span class="new">New</span></a></li>
+                    <li><a href="#">State Coordinators</a></li>
+                    <li><a href="#">Affiliated VTC List <span class="new">New</span></a></li>
+                    <li><a href="#">Industry Programs</a></li>
+                </ul>
+            </div>
+
+            <div class="sidebar-box">
+                <div class="sidebar-header">Information For Staff</div>
+                <ul class="sidebar-menu">
+                    <li><a href="#">Course Posters</a></li>
+                    <li><a href="#">Examination</a></li>
+                    <li><a href="#">Syllabus</a></li>
+                    <li><a href="#">Question Bank</a></li>
+                    <li><a href="#">Admission Application</a></li>
+                    <li><a href="#">Mark Sheet Model</a></li>
+                </ul>
+            </div>
+
+            <div class="sidebar-box" style="border-color: #4caf50;">
+                <div class="sidebar-header">Notices Board</div>
+                <div style="background: #00695c; height: 150px; padding: 10px; color: white; font-size: 12px; overflow-y: auto;">
+                    <p>• Updates will scroll here.</p>
+                    <p>• Upcoming examinations notified.</p>
+                    <p>• Board meeting on 15th.</p>
+                </div>
+            </div>
+        </aside>
+
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div>
+                <div class="footer-logo-row">
+                    <img src="logo.png" alt="Logo">
+                    <h4>AROKIYA ANNAI BLESSED FLAIR CENTER</h4>
+                </div>
+                <p>Arokiya Annai Blessed Flair Center is an autonomous body, Recognized by Government of India. The role of education in facilitating social and economic progress has long been recognized.</p>
+                
+                <div class="footer-contact">
+                    <h5>CONTACT DETAILS</h5>
+                    <p><strong>Phone:</strong> 044 - XXXXXXXX</p>
+                    <p><strong>Mobile:</strong> +91 7548822653</p>
+                    <p><strong>Email:</strong> <a href="mailto:info@aabfc.org">info@aabfc.org</a></p>
+                </div>
+
+                <div class="social-icons">
+                    <span><i class="fa-brands fa-facebook-f"></i></span>
+                    <span><i class="fa-brands fa-twitter"></i></span>
+                    <span><i class="fa-brands fa-google"></i></span>
+                    <span><i class="fa-brands fa-linkedin-in"></i></span>
+                </div>
+            </div>
+
+            <div>
+                <div class="footer-contact">
+                    <h5>ADDRESS</h5>
+                    <p style="color: var(--text-blue); font-weight: bold;">CENTRAL BOARD OF TRAINING</p>
+                    <p>Arokiya Annai Blessed Flair Center</p>
+                    <p>Kamanaickenpatti, PIN - 628720</p>
+                    
+                    <h5 style="margin-top: 20px;">REGIONAL PROGRAM OFFICE</h5>
+                    <p>Tamil Nadu Sector</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
 </body>
 </html>
