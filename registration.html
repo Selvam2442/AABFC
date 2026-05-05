@@ -3,55 +3,104 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registration - AABFC</title>
+    <title>Contact Us - AABFC</title>
     <link rel="icon" type="image/png" href="logo.png">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .form-box { background: #f9f9f9; border: 1px solid #ccc; padding: 20px; box-shadow: 2px 2px 5px rgba(0,0,0,0.05); }
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; font-weight: bold; margin-bottom: 5px; font-size: 13px; color: var(--sidebar-bg); }
+        .form-group input { width: 100%; padding: 10px; border: 1px solid #ccc; font-size: 14px; border-radius: 3px; }
+        .form-group input:focus { outline: none; border-color: var(--text-blue); box-shadow: 0 0 5px rgba(0,102,204,0.3); }
+        .submit-btn { background: #2ecc71; color: white; border: none; padding: 12px 20px; font-size: 15px; font-weight: bold; cursor: pointer; width: 100%; border-radius: 3px; transition: 0.2s; }
+        .submit-btn:hover { background: #27ae60; }
+    </style>
 </head>
 <body>
-    <div class="header">
-        <div class="header-top" style="margin-bottom: 0;">
-            <img src="logo.png" alt="Logo" class="header-logo">
-            <span>AABFC Registration</span>
+    <header class="top-header">
+        <div class="header-logos"><img src="logo.png" alt="AABFC Logo"></div>
+        <div class="header-text">
+            <h2>ஆரோக்கிய அன்னை ஆசீர்வதிக்கப்பட்ட திறமை மையம்</h2>
+            <h1>AROKIYA ANNAI BLESSED FLAIR CENTER</h1>
+            <p>(An Autonomous Body, Recognized Government of India - Tamil Nadu)</p>
         </div>
-    </div>
-    
-    <div class="container animate-scale slide-page">
-        <div class="glass-card form-card">
-            <h3 style="margin-bottom: 25px; text-align: center; color: var(--primary); text-transform: uppercase;"><i class="fa-solid fa-file-signature"></i> Student Application</h3>
+        <div class="header-logos"><img src="https://upload.wikimedia.org/wikipedia/en/4/41/Flag_of_India.svg" alt="India Flag" style="width: 80px; border: 1px solid #ccc;"></div>
+    </header>
+
+    <nav class="main-nav">
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="profiles.html">Student Profiles</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="videos.html">Videos</a></li>
+            <li><a href="registration.html" class="active">Contact Us</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <aside class="left-sidebar">
+            <div class="sidebar-box">
+                <div class="sidebar-header">Menu</div>
+                <ul class="sidebar-menu">
+                    <li><a href="#">Admission Procedure</a></li>
+                    <li><a href="#">Fees Structure</a></li>
+                    <li><a href="#">Terms & Conditions</a></li>
+                </ul>
+            </div>
+            <div style="text-align: center; margin-top: 20px;">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Skill_India_logo.svg/1200px-Skill_India_logo.svg.png" alt="Skill India" style="width: 120px;">
+            </div>
+        </aside>
+
+        <main class="content-area">
+            <div class="content-header">Contact & Application Form</div>
+            <p style="font-size: 13px; margin-bottom: 20px; color: #555; text-align: justify;">Fill out the official application form below. Upon submission, your details will be securely forwarded to the administration office via our official WhatsApp gateway for rapid processing.</p>
             
-            <div class="form-group">
-                <input type="text" id="name" placeholder="Full Name (Required)" required>
-                <i class="fa-solid fa-user input-icon"></i>
+            <div class="form-box">
+                <div class="form-group">
+                    <label for="name">Full Name *</label>
+                    <input type="text" id="name" placeholder="Enter student's full name" required>
+                </div>
+                <div class="form-group">
+                    <label for="age">Age *</label>
+                    <input type="number" id="age" placeholder="Enter age" required>
+                </div>
+                <div class="form-group">
+                    <label for="class">Class / Course applied for *</label>
+                    <input type="text" id="class" placeholder="e.g., BCA, Art Training" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone Number *</label>
+                    <input type="tel" id="phone" placeholder="Enter 10-digit mobile number" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email Address (Optional)</label>
+                    <input type="email" id="email" placeholder="student@example.com">
+                </div>
+                
+                <button class="submit-btn" onclick="sendToWhatsApp()"><i class="fa-brands fa-whatsapp"></i> Submit Official Application</button>
             </div>
-            <div class="form-group">
-                <input type="number" id="age" placeholder="Age (Required)" required>
-                <i class="fa-solid fa-calendar input-icon"></i>
+        </main>
+
+        <aside class="right-sidebar">
+            <div class="sidebar-box" style="border-color: var(--nav-bg);">
+                <div class="sidebar-header" style="background: var(--nav-bg);">Contact Details</div>
+                <div style="padding: 15px; font-size: 13px; line-height: 1.8;">
+                    <p><i class="fa-solid fa-phone" style="color: var(--sidebar-bg);"></i> 044 - XXXXXXXX</p>
+                    <p><i class="fa-solid fa-mobile" style="color: var(--sidebar-bg);"></i> +91 7548822653</p>
+                    <p><i class="fa-solid fa-envelope" style="color: var(--sidebar-bg);"></i> info@aabfc.org</p>
+                    <p><i class="fa-solid fa-globe" style="color: var(--sidebar-bg);"></i> www.aabfc.org</p>
+                </div>
             </div>
-            <div class="form-group">
-                <input type="text" id="class" placeholder="Class (Required)" required>
-                <i class="fa-solid fa-graduation-cap input-icon"></i>
-            </div>
-            <div class="form-group">
-                <input type="tel" id="phone" placeholder="Phone Number (Required)" required>
-                <i class="fa-solid fa-phone input-icon"></i>
-            </div>
-            <div class="form-group">
-                <input type="email" id="email" placeholder="Email Address (Optional)">
-                <i class="fa-solid fa-envelope input-icon"></i>
-            </div>
-            
-            <button class="btn" onclick="sendToWhatsApp()"><i class="fa-brands fa-whatsapp"></i> Submit Application</button>
-            <a href="index.html" style="display:block; text-align:center; margin-top:20px; color:var(--text-light); text-decoration: none; font-weight: 600;"><i class="fa-solid fa-arrow-left"></i> Return Home</a>
-        </div>
+        </aside>
     </div>
 
-    <div class="bottom-nav">
-        <a href="index.html"><i class="fa-solid fa-house"></i>Home</a>
-        <a href="profiles.html"><i class="fa-solid fa-users"></i>Profiles</a>
-        <a href="gallery.html"><i class="fa-solid fa-image"></i>Gallery</a>
-        <a href="videos.html"><i class="fa-solid fa-play"></i>Videos</a>
-    </div>
+    <footer class="footer">
+        <div class="footer-content" style="text-align: center;">
+            <p><strong>AROKIYA ANNAI BLESSED FLAIR CENTER</strong><br>Kamanaickenpatti, PIN - 628720 | Phone: +91 7548822653</p>
+        </div>
+    </footer>
 
     <script>
         function sendToWhatsApp() {
@@ -62,11 +111,11 @@
             let email = document.getElementById('email').value;
 
             if(!name || !age || !studentClass || !phone) {
-                alert("Please complete all required fields.");
+                alert("Please complete all required fields (*).");
                 return;
             }
 
-            let message = `*AABFC New Registration*\n\n*Name:* ${name}\n*Age:* ${age}\n*Class:* ${studentClass}\n*Phone:* ${phone}\n*Email:* ${email ? email : 'Not provided'}`;
+            let message = `*AABFC OFFICIAL APPLICATION*\n\n*Name:* ${name}\n*Age:* ${age}\n*Course:* ${studentClass}\n*Phone:* ${phone}\n*Email:* ${email ? email : 'Not provided'}`;
             let whatsappUrl = `https://wa.me/916380466535?text=${encodeURIComponent(message)}`;
             window.open(whatsappUrl, '_blank');
         }

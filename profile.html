@@ -3,48 +3,104 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Profile - AABFC</title>
+    <title>Student Records - AABFC</title>
     <link rel="icon" type="image/png" href="logo.png">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .profile-header { display: flex; align-items: center; gap: 20px; padding: 20px; background: #fdfaf0; border: 1px solid #ccc; margin-bottom: 20px; }
+        .profile-header img { width: 100px; height: 100px; border-radius: 50%; border: 3px solid #00695c; }
+        .tabs { display: flex; border-bottom: 2px solid #00695c; margin-bottom: 15px; }
+        .tab-btn { background: #eee; border: 1px solid #ccc; border-bottom: none; padding: 10px 20px; cursor: pointer; font-weight: bold; color: #555; }
+        .tab-btn.active { background: #00695c; color: white; border-color: #00695c; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+        
+        /* Grid matches Gallery */
+        .photo-grid { column-count: 1; column-gap: 15px; }
+        @media (min-width: 600px) { .photo-grid { column-count: 2; } }
+        .photo-card { break-inside: avoid; margin-bottom: 15px; border: 1px solid #ddd; padding: 5px; background: #fff; cursor: pointer; text-align: center; }
+        .photo-card img { width: 100%; height: auto; display: block; border-bottom: 1px solid #eee; margin-bottom: 5px; }
+        .photo-desc { font-size: 12px; font-weight: bold; color: var(--text-blue); padding: 5px; text-transform: uppercase; }
+
+        /* Lightbox */
+        #lightbox { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0, 0, 0, 0.9); z-index: 9999; display: none; align-items: center; justify-content: center; flex-direction: column; }
+        #lightbox.active { display: flex; }
+        #lb-img { max-width: 90vw; max-height: 80vh; object-fit: contain; border: 3px solid #fff; }
+        .lb-close { position: absolute; top: 20px; right: 20px; color: white; font-size: 30px; cursor: pointer; }
+        .lb-nav { position: absolute; top: 50%; transform: translateY(-50%); color: white; font-size: 40px; cursor: pointer; padding: 20px; }
+        .lb-prev { left: 10px; } .lb-next { right: 10px; }
+        #lb-desc { color: #f39c12; font-size: 18px; margin-top: 15px; font-weight: bold; text-transform: uppercase; }
+    </style>
 </head>
 <body>
-    <div class="header" id="main-header">
-        <div class="header-top" style="margin-bottom: 0;">
-            <img src="logo.png" alt="Logo" class="header-logo">
-            <span id="header-title">Loading Portfolio...</span>
+    <header class="top-header">
+        <div class="header-logos"><img src="logo.png" alt="AABFC Logo"></div>
+        <div class="header-text">
+            <h2>ஆரோக்கிய அன்னை ஆசீர்வதிக்கப்பட்ட திறமை மையம்</h2>
+            <h1>AROKIYA ANNAI BLESSED FLAIR CENTER</h1>
+            <p>(An Autonomous Body, Recognized Government of India - Tamil Nadu)</p>
         </div>
-    </div>
-    
-    <div class="container animate-scale slide-page">
-        <div style="text-align: center; margin-bottom: 20px;">
-            <div class="profile-avatar" style="width: 100px; height: 100px;">
+        <div class="header-logos"><img src="https://upload.wikimedia.org/wikipedia/en/4/41/Flag_of_India.svg" alt="India Flag" style="width: 80px; border: 1px solid #ccc;"></div>
+    </header>
+
+    <nav class="main-nav">
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="profiles.html" class="active">Student Profiles</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="videos.html">Videos</a></li>
+            <li><a href="registration.html">Contact Us</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <aside class="left-sidebar">
+            <div class="sidebar-box">
+                <div class="sidebar-header">Student Actions</div>
+                <ul class="sidebar-menu">
+                    <li><a href="profiles.html">← Back to Roster</a></li>
+                    <li><a href="#">Print Certificate</a></li>
+                </ul>
+            </div>
+        </aside>
+
+        <main class="content-area">
+            <div class="content-header" id="header-title">Student Portfolio</div>
+            
+            <div class="profile-header">
                 <img id="dynamic-avatar" src="" alt="Profile">
+                <div>
+                    <h2 id="student-name" style="color: var(--sidebar-bg);">Loading...</h2>
+                    <p style="font-size: 13px; color: #555;">Registration Status: <strong style="color: green;">Active</strong></p>
+                </div>
             </div>
-            <h2 id="student-name" style="color: var(--accent);">Loading...</h2>
-            <p style="color: var(--text-light); font-size: 13px; margin-top: 5px;">Tap any image to view in full screen.</p>
-        </div>
-        
-        <div class="tabs">
-            <button class="tab-btn active" onclick="openTab('paintings')"><i class="fa-solid fa-palette"></i> Artworks</button>
-            <button class="tab-btn" onclick="openTab('achievements')"><i class="fa-solid fa-award"></i> Achievements</button>
-        </div>
-
-        <div id="paintings" class="tab-content glass-card active">
-            <div id="paintings-container" class="photo-grid">
-                <div class="loader" style="grid-column: 1 / -1;"><i class="fa-solid fa-circle-notch fa-spin fa-2x"></i> <span style="margin-top: 10px;">Loading portfolio...</span></div>
+            
+            <div class="tabs">
+                <button class="tab-btn active" onclick="openTab('paintings')">Artworks & Projects</button>
+                <button class="tab-btn" onclick="openTab('achievements')">Official Achievements</button>
             </div>
-        </div>
 
-        <div id="achievements" class="tab-content glass-card">
-            <div id="achievements-container" class="photo-grid">
-                <div class="loader" style="grid-column: 1 / -1;"><i class="fa-solid fa-circle-notch fa-spin fa-2x"></i> <span style="margin-top: 10px;">Loading records...</span></div>
+            <div id="paintings" class="tab-content active">
+                <div id="paintings-container" class="photo-grid"><div style="padding: 20px; font-weight: bold; color: var(--text-blue);">Loading records...</div></div>
             </div>
-        </div>
 
-        <a href="profiles.html" class="btn" style="background: white; color: var(--accent); border: 2px solid var(--accent); box-shadow: none; margin-top: 35px;"><i class="fa-solid fa-arrow-left"></i> Back to Roster</a>
+            <div id="achievements" class="tab-content">
+                <div id="achievements-container" class="photo-grid"><div style="padding: 20px; font-weight: bold; color: var(--text-blue);">Loading records...</div></div>
+            </div>
+        </main>
+
+        <aside class="right-sidebar">
+            <div class="sidebar-box">
+                <div class="sidebar-header">Verification</div>
+                <div style="padding: 10px; font-size: 12px; text-align: justify;">
+                    <p>All certificates and records displayed in this portal are officially verified by the Arokiya Annai Blessed Flair Center board.</p>
+                </div>
+            </div>
+        </aside>
     </div>
 
+    <!-- LIGHTBOX -->
     <div id="lightbox" onclick="if(event.target.id === 'lightbox') closeLightbox()">
         <div class="lb-close" onclick="closeLightbox()"><i class="fa-solid fa-xmark"></i></div>
         <div class="lb-nav lb-prev" onclick="changePhoto(-1)"><i class="fa-solid fa-chevron-left"></i></div>
@@ -53,17 +109,13 @@
         <p id="lb-desc"></p>
     </div>
 
-    <a href="https://wa.me/917548822653" target="_blank" class="floating-wa"><i class="fa-brands fa-whatsapp"></i></a>
-
-    <div class="bottom-nav">
-        <a href="index.html"><i class="fa-solid fa-house"></i>Home</a>
-        <a href="profiles.html" class="active"><i class="fa-solid fa-users"></i>Profiles</a>
-        <a href="gallery.html"><i class="fa-solid fa-image"></i>Gallery</a>
-        <a href="videos.html"><i class="fa-solid fa-play"></i>Videos</a>
-    </div>
+    <footer class="footer">
+        <div class="footer-content" style="text-align: center;">
+            <p><strong>AROKIYA ANNAI BLESSED FLAIR CENTER</strong><br>Kamanaickenpatti, PIN - 628720 | Phone: +91 7548822653</p>
+        </div>
+    </footer>
 
     <script>
-        // Tab switching logic
         function openTab(tabName) {
             let tabcontent = document.getElementsByClassName("tab-content");
             for (let i = 0; i < tabcontent.length; i++) tabcontent[i].classList.remove("active");
@@ -73,65 +125,39 @@
             event.currentTarget.classList.add("active");
         }
 
-        // Profile Loading Setup
         const urlParams = new URLSearchParams(window.location.search);
         const studentName = urlParams.get('student') || 'Student';
-
         document.getElementById('student-name').innerText = studentName;
-        document.getElementById('header-title').innerText = studentName + " Portfolio";
-        document.title = studentName + " - AABFC";
-        document.getElementById('dynamic-avatar').src = `https://ui-avatars.com/api/?name=${studentName}&background=8B0000&color=fff&size=256`;
+        document.getElementById('header-title').innerText = studentName + " - Official Portfolio";
+        document.getElementById('dynamic-avatar').src = `https://ui-avatars.com/api/?name=${studentName}&background=00695c&color=fff&size=256`;
 
-        // ==========================================
-        // LIGHTBOX LOGIC FOR PROFILE PICTURES
-        // ==========================================
+        // Lightbox Logic
         let paintingsData = [];
         let achievementsData = [];
         let currentLightboxData = [];
         let currentPhotoIndex = 0;
-        let isLightboxOpen = false;
 
         function openLightbox(type, index) {
-            // Figure out if they clicked a painting or achievement
             currentLightboxData = type === 'paintings' ? paintingsData : achievementsData;
             currentPhotoIndex = index;
-            isLightboxOpen = true;
-            
-            const lb = document.getElementById('lightbox');
-            lb.classList.add('active');
-            updateLightboxContent('scale(0.9)'); 
+            document.getElementById('lightbox').classList.add('active');
+            updateLightboxContent();
         }
 
-        function closeLightbox() {
-            isLightboxOpen = false;
-            document.getElementById('lightbox').classList.remove('active');
-        }
+        function closeLightbox() { document.getElementById('lightbox').classList.remove('active'); }
 
         function changePhoto(step) {
             currentPhotoIndex += step;
             if (currentPhotoIndex < 0) currentPhotoIndex = currentLightboxData.length - 1;
             if (currentPhotoIndex >= currentLightboxData.length) currentPhotoIndex = 0;
-            
-            let transformDir = step > 0 ? 'translateX(30px)' : 'translateX(-30px)';
-            updateLightboxContent(transformDir);
+            updateLightboxContent();
         }
 
-        function updateLightboxContent(transformStart = 'scale(0.9)') {
-            const img = document.getElementById('lb-img');
-            img.style.transform = transformStart;
-            img.style.opacity = '0';
-            
-            setTimeout(() => {
-                img.src = currentLightboxData[currentPhotoIndex].img;
-                document.getElementById('lb-desc').innerText = currentLightboxData[currentPhotoIndex].desc;
-                img.style.transform = 'translateX(0) scale(1)';
-                img.style.opacity = '1';
-            }, 50);
+        function updateLightboxContent() {
+            document.getElementById('lb-img').src = currentLightboxData[currentPhotoIndex].img;
+            document.getElementById('lb-desc').innerText = currentLightboxData[currentPhotoIndex].desc;
         }
 
-        // ==========================================
-        // FETCH DATA FROM GOOGLE DRIVE
-        // ==========================================
         const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyfyKNm1lUecFRhi7clz4rENlfCxyDGZQDHevcXSm8e5CNE00meMk9_0Zp8n9wVkw8huw/exec"; 
 
         fetch(SCRIPT_URL + "?name=" + studentName)
@@ -142,76 +168,24 @@
                 paintContainer.innerHTML = ''; achiContainer.innerHTML = '';
 
                 if(data.error) {
-                    paintContainer.innerHTML = `<p style='grid-column: 1 / -1; text-align:center; color:red;'>Directory for ${studentName} not found.</p>`;
-                    achiContainer.innerHTML = `<p style='grid-column: 1 / -1; text-align:center; color:red;'>Directory for ${studentName} not found.</p>`;
+                    paintContainer.innerHTML = `<p style='color:red;'>Directory not found.</p>`;
                     return;
                 }
 
-                // Process Paintings
                 if (data.paintings && data.paintings.length > 0) {
-                    paintingsData = data.paintings; // Save to array for Lightbox
+                    paintingsData = data.paintings;
                     data.paintings.forEach((item, index) => { 
-                        paintContainer.innerHTML += `
-                            <div class="photo-card animate-up" onclick="openLightbox('paintings', ${index})">
-                                <img src="${item.img}" alt="Artwork" loading="lazy">
-                                <p class="photo-desc">${item.desc}</p>
-                            </div>
-                        `; 
+                        paintContainer.innerHTML += `<div class="photo-card" onclick="openLightbox('paintings', ${index})"><img src="${item.img}" alt="Artwork" loading="lazy"><p class="photo-desc">${item.desc}</p></div>`; 
                     });
-                } else { 
-                    paintContainer.innerHTML = "<p style='grid-column: 1 / -1; text-align:center; color: var(--text-light); padding: 20px;'>No artworks found.</p>"; 
-                }
+                } else { paintContainer.innerHTML = "<p>No artworks found.</p>"; }
 
-                // Process Achievements
                 if (data.achievements && data.achievements.length > 0) {
-                    achievementsData = data.achievements; // Save to array for Lightbox
+                    achievementsData = data.achievements;
                     data.achievements.forEach((item, index) => { 
-                        achiContainer.innerHTML += `
-                            <div class="photo-card animate-up" onclick="openLightbox('achievements', ${index})">
-                                <img src="${item.img}" alt="Certificate" loading="lazy">
-                                <p class="photo-desc">${item.desc}</p>
-                            </div>
-                        `; 
+                        achiContainer.innerHTML += `<div class="photo-card" onclick="openLightbox('achievements', ${index})"><img src="${item.img}" alt="Certificate" loading="lazy"><p class="photo-desc">${item.desc}</p></div>`; 
                     });
-                } else { 
-                    achiContainer.innerHTML = "<p style='grid-column: 1 / -1; text-align:center; color: var(--text-light); padding: 20px;'>No records found.</p>"; 
-                }
-            })
-            .catch(error => {
-                document.getElementById('paintings-container').innerHTML = "<p style='grid-column: 1 / -1; text-align:center; color:red;'>Connection error.</p>";
-                document.getElementById('achievements-container').innerHTML = "<p style='grid-column: 1 / -1; text-align:center; color:red;'>Connection error.</p>";
+                } else { achiContainer.innerHTML = "<p>No records found.</p>"; }
             });
-
-        // App-Level Interactions (Header Scroll & Lightbox Swipes)
-        document.addEventListener('DOMContentLoaded', () => {
-            window.addEventListener('scroll', function() {
-                const header = document.getElementById('main-header');
-                if (window.scrollY > 50) header.classList.add('scrolled'); 
-                else header.classList.remove('scrolled');
-            });
-
-            const lightbox = document.getElementById('lightbox');
-            let lbTouchStartX = 0, lbTouchEndX = 0;
-
-            // Swiping on Mobile Lightbox
-            lightbox.addEventListener('touchstart', e => { lbTouchStartX = e.changedTouches[0].screenX; }, {passive: true});
-            lightbox.addEventListener('touchend', e => { 
-                if (!isLightboxOpen) return;
-                lbTouchEndX = e.changedTouches[0].screenX; 
-                let diff = lbTouchStartX - lbTouchEndX;
-                if (diff > 50) changePhoto(1); 
-                else if (diff < -50) changePhoto(-1); 
-            }, {passive: true});
-
-            // PC Keyboard Navigation
-            document.addEventListener('keydown', (e) => {
-                if (!isLightboxOpen) return;
-                if (e.key === 'ArrowRight') changePhoto(1);
-                else if (e.key === 'ArrowLeft') changePhoto(-1);
-                else if (e.key === 'Escape') closeLightbox();
-            });
-        });
     </script>
 </body>
 </html>
-

@@ -3,69 +3,94 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Profiles - AABFC</title>
+    <title>Student Roster - AABFC</title>
     <link rel="icon" type="image/png" href="logo.png">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .roster-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 15px; margin-top: 15px; }
+        .roster-card { border: 1px solid #ccc; padding: 15px; text-align: center; background: #fafafa; text-decoration: none; color: #333; box-shadow: 2px 2px 5px rgba(0,0,0,0.05); transition: 0.2s; }
+        .roster-card:hover { border-color: var(--text-blue); background: #f0f8ff; }
+        .roster-avatar { width: 80px; height: 80px; border-radius: 50%; border: 2px solid #00695c; margin: 0 auto 10px; overflow: hidden; }
+        .roster-avatar img { width: 100%; height: 100%; object-fit: cover; }
+        .roster-card h3 { font-size: 16px; color: var(--text-blue); }
+        .roster-card p { font-size: 12px; color: #777; margin-top: 5px; }
+    </style>
 </head>
 <body>
-    <div class="header">
-        <div class="header-top" style="margin-bottom: 0;">
-            <img src="logo.png" alt="Logo" class="header-logo">
-            <span>AABFC Roster</span>
+    <header class="top-header">
+        <div class="header-logos"><img src="logo.png" alt="AABFC Logo"></div>
+        <div class="header-text">
+            <h2>ஆரோக்கிய அன்னை ஆசீர்வதிக்கப்பட்ட திறமை மையம்</h2>
+            <h1>AROKIYA ANNAI BLESSED FLAIR CENTER</h1>
+            <p>(An Autonomous Body, Recognized Government of India - Tamil Nadu)</p>
         </div>
-    </div>
-    
-    <div class="container animate-up slide-page">
-        <div class="profile-grid">
-            
-            <a href="profile.html?student=Selvam" class="glass-card profile-card">
-                <div class="profile-avatar">
-                    <img src="https://ui-avatars.com/api/?name=Selvam&background=D4AF37&color=fff&size=128" alt="Selvam">
-                </div>
-                <h3>Selvam</h3>
-                <p style="font-size: 12px; color: var(--text-light); margin-top: 5px;">View Portfolio</p>
-            </a>
+        <div class="header-logos"><img src="https://upload.wikimedia.org/wikipedia/en/4/41/Flag_of_India.svg" alt="India Flag" style="width: 80px; border: 1px solid #ccc;"></div>
+    </header>
 
-            <a href="profile.html?student=Antony" class="glass-card profile-card">
-                <div class="profile-avatar">
-                    <img src="https://ui-avatars.com/api/?name=Antony&background=8B0000&color=fff&size=128" alt="Antony">
-                </div>
-                <h3>Antony</h3>
-                <p style="font-size: 12px; color: var(--text-light); margin-top: 5px;">View Portfolio</p>
-            </a>
+    <nav class="main-nav">
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="profiles.html" class="active">Student Profiles</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="videos.html">Videos</a></li>
+            <li><a href="registration.html">Contact Us</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <!-- LEFT SIDEBAR -->
+        <aside class="left-sidebar">
+            <div class="sidebar-box">
+                <div class="sidebar-header">Student Section</div>
+                <ul class="sidebar-menu">
+                    <li><a href="#">Admission Procedure</a></li>
+                    <li><a href="#">Practical Record</a></li>
+                    <li><a href="#">Certificate Verification</a></li>
+                </ul>
+            </div>
+            <div style="text-align: center; margin-top: 20px;">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Skill_India_logo.svg/1200px-Skill_India_logo.svg.png" alt="Skill India" style="width: 120px;">
+            </div>
+        </aside>
+
+        <!-- CENTER CONTENT -->
+        <main class="content-area">
+            <div class="content-header">Official Student Roster</div>
+            <p style="font-size: 13px; margin-bottom: 15px; color: #555;">Select a student below to view their official portfolio and records.</p>
             
+            <div class="roster-grid">
+                <a href="profile.html?student=Selvam" class="roster-card">
+                    <div class="roster-avatar"><img src="https://ui-avatars.com/api/?name=Selvam&background=00695c&color=fff&size=128" alt="Selvam"></div>
+                    <h3>Selvam</h3>
+                    <p>View Records</p>
+                </a>
+                <a href="profile.html?student=Antony" class="roster-card">
+                    <div class="roster-avatar"><img src="https://ui-avatars.com/api/?name=Antony&background=1a237e&color=fff&size=128" alt="Antony"></div>
+                    <h3>Antony</h3>
+                    <p>View Records</p>
+                </a>
+            </div>
+        </main>
+
+        <!-- RIGHT SIDEBAR -->
+        <aside class="right-sidebar">
+            <div class="sidebar-box">
+                <div class="sidebar-header">Information For Staff</div>
+                <ul class="sidebar-menu">
+                    <li><a href="#">Examination</a></li>
+                    <li><a href="#">Syllabus</a></li>
+                    <li><a href="#">Question Bank</a></li>
+                </ul>
+            </div>
+        </aside>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-content" style="text-align: center;">
+            <p><strong>AROKIYA ANNAI BLESSED FLAIR CENTER</strong><br>Kamanaickenpatti, PIN - 628720 | Phone: +91 7548822653 | Email: info@aabfc.org</p>
         </div>
-    </div>
-
-    <a href="https://wa.me/917548822653" target="_blank" class="floating-wa"><i class="fa-brands fa-whatsapp"></i></a>
-
-    <div class="bottom-nav">
-        <a href="index.html"><i class="fa-solid fa-house"></i>Home</a>
-        <a href="profiles.html" class="active"><i class="fa-solid fa-users"></i>Profiles</a>
-        <a href="gallery.html"><i class="fa-solid fa-image"></i>Gallery</a>
-        <a href="videos.html"><i class="fa-solid fa-play"></i>Videos</a>
-    </div>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // GITHUB BULLETPROOF SWIPE
-            let touchstartX = 0, touchendX = 0;
-            const pages = ['index.html', 'profiles.html', 'gallery.html', 'videos.html'];
-            
-            let currentPage = window.location.pathname.split('/').pop().split('?')[0];
-            if (!pages.includes(currentPage)) { currentPage = 'index.html'; }
-            let currentIndex = pages.indexOf(currentPage);
-
-            document.addEventListener('touchstart', e => { touchstartX = e.changedTouches[0].screenX; }, {passive: true});
-            document.addEventListener('touchend', e => { 
-                touchendX = e.changedTouches[0].screenX; 
-                if (currentIndex === -1) return; 
-                let diff = touchstartX - touchendX;
-                if (diff > 75 && currentIndex < pages.length - 1) window.location.href = pages[currentIndex + 1]; 
-                else if (diff < -75 && currentIndex > 0) window.location.href = pages[currentIndex - 1]; 
-            }, {passive: true});
-        });
-    </script>
+    </footer>
 </body>
 </html>
